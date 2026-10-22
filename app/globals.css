@@ -1,26 +1,218 @@
 @import "tailwindcss";
 
+/* Design tokens — see docs/design.md */
+@theme {
+  --color-bg: #050a14;
+  --color-surface: #0a1120;
+  --color-surface-2: #111a2c;
+  --color-line: rgb(148 163 184 / 0.18);
+  --color-line-strong: rgb(148 163 184 / 0.35);
+  --color-fg: #f5f7fb;
+  --color-fg-muted: #a8b6cc;
+  --color-fg-subtle: #8492a9;
+  --color-accent: #02adff; /* fills: buttons, rules, markers */
+  --color-accent-ink: #02adff; /* accent-coloured text — darker in light theme */
+  --color-accent-violet: #6858f5;
+  --color-on-accent: #03101c;
+  --color-danger: #ff8a8a; /* form errors — 8:1 on surface */
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --header-h: 5.625rem;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Themes. The html element carries the visitor's choice (set before paint by the
+   inline script in layout.tsx). Image-backed sections pin data-theme="dark", so
+   the dark values are restated here for nested scopes, not only on :root. */
+[data-theme="dark"] {
+  --color-bg: #050a14;
+  --color-surface: #0a1120;
+  --color-surface-2: #111a2c;
+  --color-line: rgb(148 163 184 / 0.18);
+  --color-line-strong: rgb(148 163 184 / 0.35);
+  --color-fg: #f5f7fb;
+  --color-fg-muted: #a8b6cc;
+  --color-fg-subtle: #8492a9;
+  --color-accent-ink: #02adff;
+  --color-danger: #ff8a8a;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Light: AA text on #f4f6fa — fg 17:1, muted 7.3:1, subtle 5.2:1, ink 5.5:1. */
+[data-theme="light"] {
+  --color-bg: #f4f6fa;
+  --color-surface: #ffffff;
+  --color-surface-2: #e9eef6;
+  --color-line: rgb(15 23 42 / 0.1);
+  --color-line-strong: rgb(15 23 42 / 0.2);
+  --color-fg: #0b1220;
+  --color-fg-muted: #44526a;
+  --color-fg-subtle: #5b6880;
+  --color-accent-ink: #0369a1;
+  --color-danger: #c53030;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Future sections land below the header, not under it. */
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+/* Entrance motion: one pass, staggered via --delay. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.enter {
+  animation: rise 900ms var(--ease-out) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+.enter-backdrop {
+  animation: settle 1800ms var(--ease-out) both;
+}
+
+/* Hero headline: characters rise and un-tilt one after another. */
+@keyframes char-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.55em, 0) rotateX(-70deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.split-line {
+  display: block;
+  perspective: 600px;
+}
+
+.split-char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  animation: char-rise 900ms cubic-bezier(0.215, 0.61, 0.355, 1) both;
+  animation-delay: var(--char-delay, 0ms);
+}
+
+/* Light glints running along the hero's bottom hairline. */
+@keyframes glint {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(400%);
+    opacity: 0;
+  }
+}
+
+.glint {
+  animation: glint 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation-delay: var(--glint-delay, 0ms);
+}
+
+/* Gentle vertical bob for the scroll cue. */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+.bob {
+  animation: bob 2.8s ease-in-out infinite;
+}
+
+/* Infinite marquee: the track holds two copies and slides by one copy. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
+.marquee-track[data-reverse="true"] {
+  animation-direction: reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .enter,
+  .enter-backdrop,
+  .split-char,
+  .glint,
+  .bob,
+  .marquee-track {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }
