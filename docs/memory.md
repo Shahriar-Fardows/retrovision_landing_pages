@@ -83,6 +83,9 @@ v3 শেষ — Shahriar-এর review-এর অপেক্ষা। Art এ�
 | A10 | Raw WebGL2, Three.js নয় | একটা full-screen quad-এর জন্য ~600KB library অপ্রয়োজনীয় |
 | A11 | Hero centered | Shahriar-এর নির্দেশ (standards-এর centered-hero সতর্কতা জেনেও) |
 | A12 | Desktop object-position aspect-ratio দিয়ে (`xl:[@media(min-aspect-ratio:16/9)]`) | Width দিয়ে হয় না: 1440×900 আর 1791×924-এ আলাদা মান লাগে |
+| A17 | Hero art-এর grade script দিয়ে, হাতে নয় | মূল art `assets/art/`-এ অক্ষত; বদলানো সহজ ও reproducible |
+| A18 | Hero ও Final CTA light mode-এও dark | রাতের art-এর উপর হালকা theme মানায় না |
+| A19 | What we build-এ stock/অন্য game-এর ছবি নয়, code-drawn mock-up | নিজের brand দিয়ে বানানো, "client নয়" label সহ |
 | A14 | Pubzi-র code/asset copy নয়, শুধু pattern | Paid Envato template — license ছাড়া copy করা যায় না |
 | A15 | Testimonial, client logo, counter, দাম নেই | যাচাইকৃত data নেই (`00 §93–94`); Shahriar: দাম ছাড়া engagement |
 | A16 | Inquiry → `INQUIRY_TO_EMAIL=shahriarfardows@gmail.com` | Shahriar-এর উত্তর (2026-10-22) |
@@ -117,9 +120,12 @@ v3 শেষ — Shahriar-এর review-এর অপেক্ষা। Art এ�
 | 2026-10-22 | v4: সব hero content centered; overlay center-ellipse; object-position aspect-ratio অনুযায়ী (warrior ও cape tip রক্ষা) |
 | 2026-10-22 | v4.1: লেখার পেছনে WebGL depth-of-field (castle নরম); reduced-motion-এ স্থির DOF frame |
 | 2026-10-22 | v5: পুরো landing page — Pubzi (ex-coders, Envato) থেকে motion pattern নিজের কোডে; GSAP যোগ; inquiry → Resend |
+| 2026-10-22 | v6: hero art-এর বাঁ দিক lift; light/dark theme; What we build-এ তিনটা আলাদা visual |
 
 ## Notes for future sessions
 
+- Art বদলালে ক্রম: `node scripts/grade-hero-art.mjs` → `node scripts/build-hero-motion-mask.mjs`
+- লেখায় cyan লাগলে `text-accent-ink`, `text-accent` নয় (light-এ contrast fail)
 - **CSS না বদলালে:** dev server restart — turbopack Tailwind loader `globals.css` cache করে। TSX-এর Tailwind class ঠিকমতো আসে, তাই দরকার হলে utility/arbitrary variant ব্যবহার করো
 - Reference-এর সাথে মেলাতে: viewport 1769×889, mockup-কে সাময়িক `img.src` বানিয়ে live text রং বদলে overlay করো; মাপ JS `Range.getClientRects()` দিয়ে
 - `ButtonLink`-এ `className`-এ `hidden` দিলে কাজ করে না (base-এ `inline-flex`) — wrapper div ব্যবহার করো

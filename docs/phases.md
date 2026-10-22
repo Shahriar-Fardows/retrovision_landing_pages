@@ -85,3 +85,9 @@ updated: 2026-10-22
 - [ ] Resend key ও verified sender domain
 - [ ] Lighthouse
 - [ ] Shahriar-এর copy review (Engagement ও FAQ-এর নীতি-বাক্য)
+
+## 2026-10-22 — v6
+
+- [x] Hero art-এর বাঁ দিক lift (source আলাদা রাখা, script দিয়ে grade)
+- [x] Light / dark theme + toggle, flash ছাড়া
+- [x] "What we build" — তিনটা আলাদা code-drawn visual

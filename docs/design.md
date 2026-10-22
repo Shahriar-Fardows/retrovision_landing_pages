@@ -59,7 +59,22 @@ Overlay: `rgb(4 9 20)` বিভিন্ন alpha-তে (Hero.tsx)।
 
 ## 3. Themes
 
-শুধু dark। Light theme N/A।
+Dark (default) ও light — `<html data-theme>`-এ। `app/layout.tsx`-এর inline script paint-এর আগে `localStorage["rv-theme"]` বা OS preference পড়ে বসায় (flash নেই)। Toggle: `components/ui/ThemeToggle.tsx` (header-এ, desktop ও mobile)।
+
+| Token | Dark | Light |
+|---|---|---|
+| `bg` | `#050a14` | `#f4f6fa` |
+| `surface` | `#0a1120` | `#ffffff` |
+| `surface-2` | `#111a2c` | `#e9eef6` |
+| `fg` | `#f5f7fb` | `#0b1220` (17:1) |
+| `fg-muted` | `#a8b6cc` | `#44526a` (7.3:1) |
+| `fg-subtle` | `#8492a9` | `#5b6880` (5.2:1) |
+| `accent-ink` (accent রঙের **লেখা**) | `#02adff` | `#0369a1` (5.5:1) |
+| `danger` | `#ff8a8a` | `#c53030` (5.1:1) |
+| `accent` (fill) | `#02adff` | `#02adff` |
+
+নিয়ম: cyan `accent` শুধু fill/rule/marker — light-এ লেখা হিসেবে 2.3:1, তাই লেখায় সবসময় `accent-ink`।
+Hero ও Final CTA রাতের art-এর উপর, তাই `data-theme="dark"`-এ pinned; header hero-র উপরে থাকা অবস্থায় dark, scroll-এর পর visitor-এর theme।
 
 ## 4. Typography (1769px-এ reference-এর সাথে মাপা)
 

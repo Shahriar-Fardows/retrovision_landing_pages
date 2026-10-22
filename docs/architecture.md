@@ -58,9 +58,12 @@ retro_vision/
 │   ├── ui/
 │   │   ├── Container.tsx
 │   │   ├── ButtonLink.tsx   primary / outline / ghost variants
-│   │   └── ArrowIcon.tsx
+│   │   ├── ArrowIcon.tsx
+│   │   ├── SectionHeading.tsx
+│   │   └── ThemeToggle.tsx      light/dark switch (useSyncExternalStore on <html data-theme>)
 │   └── visuals/
-│       └── HeroArtMotion.tsx   WebGL2 warp layer over the hero art ("use client")
+│       ├── HeroArtMotion.tsx   WebGL2 warp layer over the hero art ("use client")
+│       └── CapabilityVisuals.tsx  code-drawn brand board, website and campaign mock-ups
 ├── app/actions/inquiry.ts   server action → Resend REST (no SDK)
 ├── app/robots.ts · app/sitemap.ts · app/opengraph-image.jpg
 ├── lib/gsap.ts           GSAP + ScrollTrigger + useGSAP registration
@@ -68,8 +71,10 @@ retro_vision/
 │   ├── site.ts           SECTION_IDS, NAV_LINKS, PRIMARY_CTA
 │   └── content.ts        সব section-এর copy (এক জায়গায়)
 ├── docs/                 এই ছয়টা ফাইল
+├── assets/art/retro-vision-hero-source.png   মূল art (ship হয় না)
 ├── scripts/
-│   └── build-hero-motion-mask.mjs   art থেকে motion mask বানায় (sharp)
+│   ├── grade-hero-art.mjs           source → public art: বাঁ দিকের shadow lift
+│   └── build-hero-motion-mask.mjs   art থেকে motion mask বানায় (sharp) — grade-এর পরে চালাও
 └── public/images/        retro-vision-hero.png (key art) · hero-motion-mask.png (R cape · G fog · B breath)
 ```
 
