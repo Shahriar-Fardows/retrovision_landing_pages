@@ -5,9 +5,9 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { SECTION_IDS } from "@/data/site";
 
 const NEXT_STEPS = [
-  "We read your inquiry and reply by email.",
-  "A short call to understand your game and goals.",
-  "A written plan with scope, timeline and quote.",
+  "A person reads your project and replies within 48 hours — including “not us” if that is the useful answer.",
+  "If there is a fit, you get a written scope with the order of operations, boundaries and price.",
+  "No account, no calendar link. Nothing starts until you accept the scope.",
 ] as const;
 
 export default function Inquiry() {
@@ -18,8 +18,8 @@ export default function Inquiry() {
           <SectionHeading
             id="inquiry-title"
             label="Start a project"
-            title="Tell us about your game."
-            intro="Share where you are and what you need. There's no commitment until you've seen a plan you're happy with."
+            title="What does your game need next?"
+            intro="Send the stage, the outcome and the range you are working with."
           />
           <ol className="mt-10 grid gap-5">
             {NEXT_STEPS.map((step, i) => (

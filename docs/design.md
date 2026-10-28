@@ -214,3 +214,21 @@ Error color: `--color-danger: #ff8a8a` (form)।
 4. Glassmorphism card, random particle/grid
 5. Split-character text animation
 6. Stock photo বা অসম্পর্কিত gaming screenshot
+
+## v7 (2026-10-29) — আসল brand
+
+> এই অংশ উপরের পুরনো মানগুলোকে override করে।
+
+| কী | মান | উৎস |
+|---|---|---|
+| Logo | `public/images/retro-vision-logo.png` (3D চশমা + `RETRO_ViSiON`), `components/ui/Logo.tsx`; favicon = চশমা (`app/icon.png`) | Shahriar-এর দেওয়া file |
+| Display font | Space Grotesk (h1–h3, marquee, tabs) | Heinzsauce-এর পাঠানো তালিকা |
+| Body font | Inter | ঐ |
+| Mono | JetBrains Mono | ঐ |
+| `accent` (fill) | `#0092d7` — logo-র নীল লেন্স; button-এ dark text 5.6:1 | Logo |
+| `accent-red` | `#e6464f` — logo-র লাল লেন্স; marker ও gradient | Logo |
+| `accent-violet` | `#7b5ce0` — নীল→লাল gradient-এর মাঝখান | Logo frame |
+| `accent-ink` | dark `#2aa8ef` (7.5:1) · light `#006aa3` (5.4:1) | মাপা |
+| Brand gradient | `#2aa8ef → #7b5ce0 → #e6464f` (hero line 2, final CTA, package highlight) | Logo frame + লাইভ site |
+
+নাম সবসময় `Retro_Vision` (underscore সহ), tagline: "Making games impossible to ignore."

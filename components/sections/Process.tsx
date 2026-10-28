@@ -10,7 +10,12 @@ export default function Process() {
     <section aria-labelledby="process-title" className="bg-surface py-24 md:py-32">
       <Container>
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <SectionHeading id="process-title" label="How we work" title="From first build to launch day." />
+          <SectionHeading
+            id="process-title"
+            label="What happens next"
+            title="A short path from question to a clear decision."
+            intro="No obligation until you accept the scope."
+          />
           <ButtonLink href={PRIMARY_CTA.href} variant="ghost" arrow="up-right" className="self-start md:self-auto">
             {PRIMARY_CTA.label}
           </ButtonLink>
@@ -22,8 +27,13 @@ export default function Process() {
           <span aria-hidden="true" className="absolute top-0 left-[5px] h-full w-px bg-line-strong md:hidden" />
           {PROCESS.map((item) => (
             <li key={item.step} data-reveal className="relative pl-8 md:pl-0">
-              <span aria-hidden="true" className="absolute top-0 left-0 size-[11px] rotate-45 border border-accent bg-bg md:static md:block" />
-              <p className="font-mono text-xs text-accent-ink md:mt-7">Step {item.step}</p>
+              <span
+                aria-hidden="true"
+                className="absolute top-0 left-0 size-[11px] rotate-45 border border-accent bg-bg md:static md:block"
+              />
+              <p className="font-mono text-xs text-accent-ink uppercase md:mt-7">
+                {item.step} · {item.owner}
+              </p>
               <h3 className="mt-2 text-xl font-bold text-fg">{item.title}</h3>
               <p className="mt-3 leading-[1.65] text-fg-muted">{item.body}</p>
             </li>

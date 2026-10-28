@@ -2,40 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import ButtonLink from "@/components/ui/ButtonLink";
+import Logo from "@/components/ui/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import Container from "@/components/ui/Container";
 import { NAV_LINKS, PRIMARY_CTA } from "@/data/site";
 
-function LogoMark({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 28 32" aria-hidden="true" className={className}>
-      <defs>
-        <linearGradient id="rv-mark" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#02adff" />
-          <stop offset="1" stopColor="#6858f5" />
-        </linearGradient>
-      </defs>
-      <g fill="url(#rv-mark)">
-        <path d="M0 0h6v32H0z" />
-        <path d="M6 0h9.5a8.5 8.5 0 0 1 0 17H6v-5.5h9.25a3 3 0 0 0 0-6H6z" />
-        <path d="M12.6 15.6h6.7L27.5 32h-6.7z" />
-      </g>
-    </svg>
-  );
-}
-
 function Wordmark() {
   return (
-    <a
-      href="#top"
-      className="flex h-11 items-center gap-3 text-fg"
-      aria-label="Retro Vision — back to top"
-    >
-      <LogoMark className="h-8 w-auto" />
-      <span className="text-2xl leading-none tracking-[0.01em] uppercase">
-        <span className="font-extrabold">Retro</span>
-        <span className="font-medium">Vision</span>
-      </span>
+    <a href="#top" className="flex h-11 items-center" aria-label="Retro_Vision — back to top">
+      <Logo priority className="w-[168px] sm:w-[200px]" />
     </a>
   );
 }

@@ -1,5 +1,6 @@
 import { cacheLife } from "next/cache";
 import Container from "@/components/ui/Container";
+import Logo from "@/components/ui/Logo";
 import { NAV_LINKS, PRIMARY_CTA } from "@/data/site";
 
 // Cached so the page can still prerender statically; refreshes daily.
@@ -15,13 +16,16 @@ export default async function SiteFooter() {
     <footer className="border-t border-line bg-bg">
       <Container className="grid gap-12 py-16 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-6">
-          <p className="text-2xl leading-none tracking-[0.01em] text-fg uppercase">
-            <span className="font-extrabold">Retro</span>
-            <span className="font-medium">Vision</span>
+          <Logo className="w-[220px]" />
+          <p className="mt-6 max-w-sm leading-[1.65] text-fg-muted">
+            Full-service marketing for ambitious game developers. Making games impossible to ignore.
           </p>
-          <p className="mt-5 max-w-sm leading-[1.65] text-fg-muted">
-            A creative and growth studio for indie developers, ambitious studios and the next generation of games.
-          </p>
+          <a
+            href="mailto:hello@retrovision.gg"
+            className="mt-5 inline-block font-mono text-sm text-accent-ink transition-colors hover:text-fg"
+          >
+            hello@retrovision.gg
+          </a>
         </div>
 
         <nav aria-label="Footer" className="md:col-span-3">
@@ -45,7 +49,7 @@ export default async function SiteFooter() {
         </div>
       </Container>
       <Container className="flex flex-col gap-3 border-t border-line py-6 text-sm text-fg-subtle sm:flex-row sm:justify-between">
-        <p>© {year} Retro Vision. All rights reserved.</p>
+        <p>© {year} Retro_Vision. All rights reserved.</p>
         <a href="#top" className="transition-colors hover:text-fg">
           Back to top ↑
         </a>

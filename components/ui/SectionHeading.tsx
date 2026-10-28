@@ -25,7 +25,7 @@ export default function SectionHeading({ id, label, title, intro, align = "left"
       </p>
       <h2
         id={id}
-        className="mt-5 text-[clamp(2rem,3.6vw,3.25rem)] leading-[1.1] font-extrabold tracking-[-0.02em] text-balance text-fg"
+        className="mt-5 text-[clamp(2rem,3.6vw,3.25rem)] leading-[1.1] font-bold tracking-[-0.02em] text-balance text-fg"
       >
         {title}
       </h2>

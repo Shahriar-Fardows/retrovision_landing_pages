@@ -3,7 +3,7 @@
 import { useActionState, useEffect, useRef } from "react";
 import { submitInquiry, type InquiryField, type InquiryState } from "@/app/actions/inquiry";
 import ArrowIcon from "@/components/ui/ArrowIcon";
-import { INQUIRY_BUDGETS, INQUIRY_SERVICES, INQUIRY_TIMELINES } from "@/data/content";
+import { INQUIRY_BUDGETS, INQUIRY_SERVICES, INQUIRY_STAGES } from "@/data/content";
 
 const initialState: InquiryState = { status: "idle" };
 
@@ -56,8 +56,12 @@ export default function InquiryForm() {
   const border = (field: InquiryField) => (errors[field] ? "border-danger" : "border-line-strong");
   const described = (field: InquiryField) => (errors[field] ? `${field}-error` : undefined);
 
+  // React resets the form after each action, and <select> only reads defaultValue on
+  // mount — so remount with the echoed values whenever they change.
+  const formKey = state.values ? JSON.stringify(state.values) : "initial";
+
   return (
-    <form ref={formRef} action={action} noValidate className="grid gap-6">
+    <form key={formKey} ref={formRef} action={action} noValidate className="grid gap-6">
       {/* Honeypot for bots — hidden from people and assistive tech. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
         <label htmlFor="company_website">Leave this empty</label>
@@ -119,7 +123,7 @@ export default function InquiryForm() {
                 name="services"
                 value={service}
                 defaultChecked={values.services?.split("|").includes(service)}
-                className="size-4 accent-[#02adff]"
+                className="size-4 accent-[#0092d7]"
               />
               {service}
             </label>
@@ -128,7 +132,7 @@ export default function InquiryForm() {
       </fieldset>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <Field name="budget" label="Budget" hint="optional">
+        <Field name="budget" label="Range you're working with" hint="optional">
           <select id="budget" name="budget" defaultValue={values.budget ?? ""} className={`${inputClass} border-line-strong`}>
             <option value="">Select a range</option>
             {INQUIRY_BUDGETS.map((b) => (
@@ -138,10 +142,10 @@ export default function InquiryForm() {
             ))}
           </select>
         </Field>
-        <Field name="timeline" label="Timeline" hint="optional">
-          <select id="timeline" name="timeline" defaultValue={values.timeline ?? ""} className={`${inputClass} border-line-strong`}>
-            <option value="">Select a timeline</option>
-            {INQUIRY_TIMELINES.map((t) => (
+        <Field name="stage" label="Where is your game?" hint="optional">
+          <select id="stage" name="stage" defaultValue={values.stage ?? ""} className={`${inputClass} border-line-strong`}>
+            <option value="">Select a stage</option>
+            {INQUIRY_STAGES.map((t) => (
               <option key={t} value={t}>
                 {t}
               </option>
@@ -157,7 +161,7 @@ export default function InquiryForm() {
           rows={5}
           required
           defaultValue={values.message}
-          placeholder="Genre, platform, where it is in development, and what you'd like help with."
+          placeholder="Genre, platform, the outcome you want, and what is getting in the way."
           aria-invalid={!!errors.message}
           aria-describedby={described("message")}
           className={`${inputClass} ${border("message")} resize-y`}

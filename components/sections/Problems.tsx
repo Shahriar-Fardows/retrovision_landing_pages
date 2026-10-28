@@ -9,9 +9,9 @@ export default function Problems() {
       <Container>
         <SectionHeading
           id="problems-title"
-          label="Why games get missed"
-          title="Great games get lost every day. Not because they aren't good."
-          intro="Most launches stumble on the same three gaps. Each one is something we fix."
+          label="The disconnect"
+          title="Even incredible games can struggle."
+          intro="A strong trailer does not guarantee results. More traffic cannot rescue a store page that does not convert."
         />
 
         <Reveal stagger as="ol" className="mt-14 md:mt-20">
@@ -23,12 +23,19 @@ export default function Problems() {
             >
               <span className="font-mono text-xs text-fg-subtle md:col-span-1">0{i + 1}</span>
               <div className="md:col-span-5">
-                <p className="font-mono text-[11px] tracking-[0.13em] text-fg-subtle uppercase">The problem</p>
-                <p className="mt-2 text-xl leading-snug font-semibold text-fg-muted">{item.problem}</p>
+                <p className="flex items-center gap-2 font-mono text-[11px] tracking-[0.13em] text-fg-subtle uppercase">
+                  <span aria-hidden="true" className="size-1.5 bg-accent-red" />
+                  The problem
+                </p>
+                <h3 className="mt-2 text-2xl leading-snug font-bold text-fg">{item.problem}</h3>
+                <p className="mt-3 leading-[1.65] text-fg-muted">{item.detail}</p>
               </div>
-              <div className="md:col-span-6">
-                <p className="font-mono text-[11px] tracking-[0.13em] text-accent-ink uppercase">What we do</p>
-                <p className="mt-2 leading-[1.65] text-fg">{item.solution}</p>
+              <div className="md:col-span-6 md:self-end">
+                <p className="flex items-center gap-2 font-mono text-[11px] tracking-[0.13em] text-accent-ink uppercase">
+                  <span aria-hidden="true" className="size-1.5 bg-accent" />
+                  {item.pillar}
+                </p>
+                <p className="mt-2 text-lg leading-[1.6] text-fg">{item.solution}</p>
               </div>
             </li>
           ))}

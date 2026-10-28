@@ -10,14 +10,17 @@
   --color-fg: #f5f7fb;
   --color-fg-muted: #a8b6cc;
   --color-fg-subtle: #8492a9;
-  --color-accent: #02adff; /* fills: buttons, rules, markers */
-  --color-accent-ink: #02adff; /* accent-coloured text — darker in light theme */
-  --color-accent-violet: #6858f5;
-  --color-on-accent: #03101c;
+  /* Brand colours come from the 3D-glasses logo: blue lens, red lens. */
+  --color-accent: #0092d7; /* logo blue — fills: buttons, rules, markers */
+  --color-accent-ink: #2aa8ef; /* blue text — 7.5:1 on bg; darker in light theme */
+  --color-accent-red: #e6464f; /* logo red — markers and the brand gradient */
+  --color-accent-violet: #7b5ce0; /* midpoint of the blue→red brand gradient */
+  --color-on-accent: #03101c; /* 5.6:1 on logo blue */
   --color-danger: #ff8a8a; /* form errors — 8:1 on surface */
 
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
   --radius-xs: 2px;
   --radius-sm: 4px;
@@ -43,12 +46,12 @@
   --color-fg: #f5f7fb;
   --color-fg-muted: #a8b6cc;
   --color-fg-subtle: #8492a9;
-  --color-accent-ink: #02adff;
+  --color-accent-ink: #2aa8ef;
   --color-danger: #ff8a8a;
   color-scheme: dark;
 }
 
-/* Light: AA text on #f4f6fa — fg 17:1, muted 7.3:1, subtle 5.2:1, ink 5.5:1. */
+/* Light: AA text on #f4f6fa — fg 17:1, muted 7.3:1, subtle 5.2:1, ink 5.4:1. */
 [data-theme="light"] {
   --color-bg: #f4f6fa;
   --color-surface: #ffffff;
@@ -58,13 +61,20 @@
   --color-fg: #0b1220;
   --color-fg-muted: #44526a;
   --color-fg-subtle: #5b6880;
-  --color-accent-ink: #0369a1;
+  --color-accent-ink: #006aa3;
   --color-danger: #c53030;
   color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Headings speak in the brand's display face; body copy stays in Inter. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
 }
 
 body {

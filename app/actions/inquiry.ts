@@ -1,6 +1,6 @@
 "use server";
 
-import { INQUIRY_BUDGETS, INQUIRY_SERVICES, INQUIRY_TIMELINES } from "@/data/content";
+import { INQUIRY_BUDGETS, INQUIRY_SERVICES, INQUIRY_STAGES } from "@/data/content";
 
 export type InquiryField = "name" | "email" | "studio" | "message";
 
@@ -27,7 +27,7 @@ export async function submitInquiry(_prev: InquiryState, formData: FormData): Pr
     studio: text(formData, "studio"),
     message: text(formData, "message"),
     budget: pick(text(formData, "budget"), INQUIRY_BUDGETS),
-    timeline: pick(text(formData, "timeline"), INQUIRY_TIMELINES),
+    stage: pick(text(formData, "stage"), INQUIRY_STAGES),
   };
   const services = formData
     .getAll("services")
@@ -65,7 +65,7 @@ export async function submitInquiry(_prev: InquiryState, formData: FormData): Pr
     `Studio / game: ${values.studio || "—"}`,
     `Services: ${services.join(", ") || "—"}`,
     `Budget: ${values.budget || "—"}`,
-    `Timeline: ${values.timeline || "—"}`,
+    `Stage: ${values.stage || "—"}`,
     "",
     values.message,
   ].join("\n");

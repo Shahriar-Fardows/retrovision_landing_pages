@@ -1,172 +1,317 @@
-// Landing-page copy. Everything here describes what Retro Vision does and how —
-// no client names, numbers, awards or testimonials until real ones exist.
+// Landing-page copy. Source of truth: Retro_Vision's services breakdown and the
+// studio's own site (retro-vision-games.lovable.app). No invented clients,
+// numbers, awards or testimonials.
+
+export const HERO_COPY =
+  "Thousands of great games compete for attention every year. Retro_Vision connects your positioning, your Steam page and your launch so the right players instantly understand, wishlist and buy.";
 
 export const MARQUEE_ITEMS = [
-  "Visual Identity",
-  "Game Websites",
-  "Launch Marketing",
-  "Creative Direction",
-  "Digital Experiences",
-  "Player Growth",
+  "Store Audits",
+  "Steam Assets",
+  "Core Premise",
+  "Trailers",
+  "Creator Campaigns",
+  "Next Fest Strategy",
+  "Localization",
+  "Community Ops",
 ] as const;
 
 export const ABOUT_STATEMENT =
-  "We are a creative and growth studio built only for games. Identity, website and marketing come from one team, so your game reaches players as one clear world, not three disconnected vendors.";
+  "We connect your positioning, store page and launch so players instantly understand, wishlist and purchase. We treat your launch as the objective, not just another billable account.";
 
 export const ABOUT_PRINCIPLES = [
-  {
-    title: "Games only",
-    body: "We don't split our attention between banks and burger chains. Every brief we take is a game, so we already speak the language of builds, wishlists and launch windows.",
-  },
-  {
-    title: "One team, one world",
-    body: "The person shaping your visual identity sits next to the person planning your launch. Nothing gets lost in hand-offs between agencies.",
-  },
-  {
-    title: "Built to be found",
-    body: "Beautiful work that nobody sees doesn't help you. Everything we make is designed to earn attention from the players most likely to love your game.",
-  },
+  { title: "Senior attention", body: "The thinking stays close to the people doing the work." },
+  { title: "Connected disciplines", body: "Positioning, production and momentum share one direction." },
+  { title: "Fair scope", body: "We define what matters and leave out what does not." },
+  { title: "Honest advice", body: "If another intervention matters more, we will say so." },
+  { title: "Your work stays yours", body: "Accounts, source files and documentation remain with you." },
 ] as const;
 
 export const PROBLEMS = [
   {
-    problem: "Your game looks different everywhere it appears.",
-    solution:
-      "We build one visual identity — logo, key art direction, colour and type — and apply it to your store page, site and socials so players recognise it instantly.",
+    problem: "Unclear premise",
+    detail:
+      "Every clip and screenshot tells a different story, leaving players unsure about the game's selling points or why they should care.",
+    pillar: "Positioning",
+    solution: "We find the one hook that makes your game click in a sentence, then build every message around it.",
   },
   {
-    problem: "Your website is an afterthought built the week before launch.",
-    solution:
-      "We design and build a fast, mobile-ready game site that tells your story, collects wishlists and newsletter sign-ups, and is easy for your team to update.",
+    problem: "Leaky store page",
+    detail:
+      "Players start landing on your page, whether from press or social, but find no compelling reason to wishlist before leaving.",
+    pillar: "Storefronts",
+    solution: "We rework capsules, trailer order and page copy so visitors leave with a wishlist.",
   },
   {
-    problem: "You post updates, but they don't reach the right players.",
-    solution:
-      "We plan the launch around the players who already love games like yours, then create the campaigns, assets and timing that put your game in front of them.",
+    problem: "Release day cliff",
+    detail:
+      "Years of passion poured into crafting the perfect launch, only for the moment to arrive and release into complete silence.",
+    pillar: "Launch",
+    solution: "Festivals, demos, press and release day planned as one build-up instead of scattered moments.",
   },
 ] as const;
 
-export const SERVICES = [
+export type Service = { name: string; focus: string; variants: readonly string[] };
+export type ServiceCategory = {
+  id: string;
+  index: string;
+  title: string;
+  tagline: string;
+  services: readonly Service[];
+};
+
+export const SERVICE_CATEGORIES: readonly ServiceCategory[] = [
   {
-    id: "identity",
+    id: "storefront",
     index: "01",
-    title: "Visual Identity",
-    lead: "Make your game recognisable at a glance.",
-    deliverables: ["Logo and wordmark", "Key art direction", "Colour and type system", "Store page and social templates"],
+    title: "Storefront & Conversion",
+    tagline: "Give every visit a reason to become a wishlist.",
+    services: [
+      {
+        name: "Store Audit",
+        focus: "Line-by-line Steam page teardown scored against direct comparables to deliver a prioritised fix list.",
+        variants: ["Full page teardown", "Capsule & screenshot review", "Tag & category audit", "Conversion fix list"],
+      },
+      {
+        name: "Copywriting",
+        focus: "Hook-first rewrite across every line of store and press text.",
+        variants: ["Short description", "About block", "Feature bullets", "Press kit boilerplate"],
+      },
+      {
+        name: "Steam Assets",
+        focus: "Unified capsule, screenshot and key art visual system built to read at thumbnail scale.",
+        variants: ["Capsule redesign", "Screenshot direction", "Key art system", "Sale-event variants"],
+      },
+      {
+        name: "Localization",
+        focus: "Store copy and key art text localised across eight major Steam markets with native-speaker review.",
+        variants: ["Store description packs", "Capsule text variants", "Native review pass", "Regional tag audit"],
+      },
+    ],
   },
   {
-    id: "digital",
+    id: "positioning",
     index: "02",
-    title: "Digital Experiences",
-    lead: "A home for your game that works as hard as you do.",
-    deliverables: ["Game and studio websites", "Press kit pages", "Wishlist and newsletter flows", "Fast, accessible front-end builds"],
+    title: "Positioning & Strategy",
+    tagline: "Find the hook, the audience and the next move.",
+    services: [
+      {
+        name: "Core Premise",
+        focus:
+          "Uncovering what the game actually means to its core fans; crafting a hook and one-liner your team can rally behind.",
+        variants: ["Positioning workshop", "Hook development", "Tagline system", "Pitch one-liner"],
+      },
+      {
+        name: "Audience Intel",
+        focus: "Written mapping of specific player communities, creator channels and comparative teardowns.",
+        variants: ["Audience mapping", "Competitive teardown", "Community recon", "Segment messaging"],
+      },
+      {
+        name: "Launch Roadmap",
+        focus: "Ranked, dated sequence from current build stage to release day, filtered for team bandwidth.",
+        variants: ["30-day action list", "Beat calendar", "Milestone planning", "Priority triage"],
+      },
+      {
+        name: "Festival Strategy",
+        focus:
+          "End-to-end preparation for Steam Next Fest and festival circuits, from demo scope to day-by-day playbooks.",
+        variants: ["Next Fest preparation", "Festival submissions", "Demo strategy", "Event playbook"],
+      },
+    ],
   },
   {
-    id: "marketing",
+    id: "trailers",
     index: "03",
-    title: "Strategic Marketing",
-    lead: "Reach the players your game was made for.",
-    deliverables: ["Audience and positioning", "Launch and update campaigns", "Social and community content", "Trailer and announcement planning"],
+    title: "Trailers & Motion",
+    tagline: "Make the game read in the seconds that matter.",
+    services: [
+      {
+        name: "Storyboarding",
+        focus: "Locking concept, script, pacing map and shot list before a single frame is cut.",
+        variants: ["Concept & script", "Trailer structure", "Hook mapping", "Capture briefs"],
+      },
+      {
+        name: "Cut & Edit",
+        focus:
+          "Full-pipeline trailer production (announcement, gameplay, launch) tailored to storefront and social formats.",
+        variants: ["Announcement trailer", "Gameplay trailer", "Launch trailer", "Social cutdowns"],
+      },
+      {
+        name: "Gameplay Capture",
+        focus: "Directed in-engine capture sessions producing trailer-grade footage and looping GIF kits for social feeds.",
+        variants: ["Directed capture", "GIF kit", "Social loops", "Press kit clips"],
+      },
+      {
+        name: "Audio Design",
+        focus:
+          "Impactful sound design, platform audio mixes and music licensing and supervision to give cuts their emotional weight.",
+        variants: ["Sound design", "Music supervision", "Platform mixes", "Trailer critique"],
+      },
+    ],
   },
-] as const;
+  {
+    id: "campaigns",
+    index: "04",
+    title: "Campaigns & Creators",
+    tagline: "Connect coverage, community and paid reach around each public beat.",
+    services: [
+      {
+        name: "Outreach",
+        focus: "Hand-researched pitching and key distribution targeting press and creators who already play your genre.",
+        variants: ["Press outreach", "Creator outreach", "Key distribution", "Coverage reporting"],
+      },
+      {
+        name: "Creator Campaigns",
+        focus:
+          "Ongoing creator relationships compounded over months, plus concentrated 25-creator tour waves for milestone dates.",
+        variants: ["Rolling outreach", "Targeted creator tours", "Activation waves", "Embargo management"],
+      },
+      {
+        name: "Community Ops",
+        focus:
+          "Discord architecture, authentic devlog ghostwriting, Reddit navigation and release-week war room coverage.",
+        variants: ["Discord architecture", "Devlog ghostwriting", "Reddit strategy", "Launch war room"],
+      },
+      {
+        name: "Paid Distribution",
+        focus:
+          "Measured paid test pilots on select channels, scaling into managed multi-channel campaigns once unit economics prove out.",
+        variants: ["Paid pilot", "Launch push", "Multi-channel campaigns", "Performance reporting"],
+      },
+    ],
+  },
+];
 
 export const PROCESS = [
-  {
-    step: "01",
-    title: "Discover",
-    body: "We play your build, read your design docs and learn who you're making the game for.",
-  },
+  { step: "01", owner: "Your move", title: "Write in", body: "Tell us the stage, the outcome and the range you are working with." },
   {
     step: "02",
-    title: "Define the world",
-    body: "We agree on positioning, the visual direction and a plan with clear deliverables and dates.",
+    owner: "Our read",
+    title: "Project review",
+    body: "We look at the page, the build and the constraint before recommending work.",
   },
   {
     step: "03",
-    title: "Build",
-    body: "Identity, website and campaign assets are designed and produced together, with reviews at every stage.",
+    owner: "Your decision",
+    title: "Written scope",
+    body: "You receive the order of operations, boundaries and price before committing.",
   },
   {
     step: "04",
-    title: "Launch and grow",
-    body: "We ship, measure what works and keep refining while your game finds its players.",
+    owner: "One thread",
+    title: "Engagement begins",
+    body: "Once accepted, the same direction stays connected from decision to delivery.",
   },
 ] as const;
 
 export const CAPABILITIES = [
   {
-    title: "Identity systems",
-    body: "Logos, wordmarks and the visual rules that keep every screen, store page and post consistent.",
-    visual: "identity",
+    title: "Steam storefronts",
+    body: "Capsules, screenshots, trailer order and page copy reworked so visitors leave with a wishlist.",
+    visual: "storefront",
   },
   {
-    title: "Game websites",
-    body: "Story-led sites with trailers, wishlist calls to action and press resources, built to load fast.",
-    visual: "website",
+    title: "Trailers & motion",
+    body: "Announcement, gameplay and launch trailers built around what makes your game fun to play, not generic hype.",
+    visual: "trailer",
   },
   {
-    title: "Launch campaigns",
-    body: "Announcement, demo and release beats planned around your audience, with the assets to match.",
+    title: "Creator campaigns",
+    body: "Your game in front of the creators, communities and players most likely to care, around every public beat.",
     visual: "campaign",
   },
 ] as const;
 
-export const ENGAGEMENTS = [
+export const PACKAGES = [
   {
-    name: "Single project",
-    fit: "For a specific deliverable with a clear finish line.",
-    includes: ["One defined scope, such as an identity or a website", "Timeline and milestones agreed up front", "Revision rounds set out in the plan"],
+    name: "Launch Readiness",
+    duration: "4–8 weeks",
+    stage: "Pre-announce → first public build",
+    summary: "Positioning settled, the store page fixed and a dated plan in hand — before the one announcement you get.",
+    includes: [
+      "Positioning & audience read",
+      "Store page diagnosis",
+      "30-day priority action list",
+      "Trailer & asset critique",
+      "Steam capsule redesign",
+      "Screenshot direction & retouch",
+    ],
+    highlight: false,
   },
   {
-    name: "Launch sprint",
-    fit: "For the months around an announcement, demo or release.",
-    includes: ["Identity, website and campaign assets together", "Launch plan with dates and channels", "Regular check-ins through launch"],
+    name: "Wishlist Growth",
+    duration: "12–24 weeks",
+    stage: "Announced → 3–12 months from release",
+    summary: "An audience engine that runs every month, so the wishlist curve compounds instead of waiting on a lucky post.",
+    includes: [
+      "Content calendar & devlog system",
+      "Creator outreach, rolling",
+      "Festival & Next Fest preparation",
+      "Discord & community audit",
+      "Animated GIF kit",
+      "Monthly performance review",
+    ],
+    highlight: true,
   },
   {
-    name: "Growth partner",
-    fit: "For studios that want ongoing creative and marketing support.",
-    includes: ["Monthly creative and campaign capacity", "Update and event content", "Regular review of what's working"],
+    name: "Momentum Buildup",
+    duration: "8–14 weeks",
+    stage: "Release week → the quarter after",
+    summary:
+      "Operators keeping the game visible through release week and the quarter after, so the spike doesn't flatten into silence.",
+    includes: [
+      "Launch war room",
+      "First 30 days post-launch",
+      "Community operations",
+      "Press & creator activation waves",
+      "Platform feature pitches",
+      "Three-month sustain extension",
+    ],
+    highlight: false,
   },
 ] as const;
 
-export const ENGAGEMENT_NOTE =
-  "Every project is quoted after a scoping conversation, so you only pay for what your game needs.";
+export const PACKAGES_NOTE =
+  "Not sure? Choose the closest moment. Packages are starting shapes — the intake is not a commitment.";
 
 export const FAQS = [
   {
-    q: "Do you only work with games?",
-    a: "Yes. We work exclusively with game developers, studios and gaming companies, from solo indie developers to established teams.",
+    q: "Why is there no public price?",
+    a: "Two games at the same stage can need very different work. We define the scope first, then put a price against it.",
   },
   {
-    q: "We're a small indie team. Is this for us?",
-    a: "Yes. We shape the scope around your stage and budget, whether that's a focused identity project or a complete launch sprint.",
+    q: "Do I have to take a package exactly as listed?",
+    a: "No. Packages are useful starting shapes. The intake gives us enough context to recommend a smaller or different scope.",
   },
   {
-    q: "How long does a project take?",
-    a: "It depends on the scope. After our first conversation we send a plan with clear milestones and dates before any work begins.",
+    q: "Who owns the work?",
+    a: "You do. The accounts, source files and documentation stay with your team.",
   },
   {
-    q: "How is pricing decided?",
-    a: "Every project is quoted individually after we understand your game, your goals and your timeline. The quote lists exactly what is included before anything starts.",
+    q: "Where do you stop?",
+    a: "Game development, publishing deals, bought audiences and campaigns for a game that is not ready. We are not the best specialist for every isolated task. We are a deeply invested partner when the whole marketing picture needs one thread.",
   },
   {
-    q: "Can you work with studios outside our time zone?",
-    a: "Yes. We work with developers worldwide and plan check-ins around the overlap in our working hours.",
-  },
-  {
-    q: "What do you need from us to get started?",
-    a: "A short description of your game, where it is in development, what you need help with, and any deadlines you're working towards. The inquiry form below covers all of it.",
+    q: "What happens after I submit?",
+    a: "A person reads the project and replies within 48 hours. If there is a fit, the next step is a written scope — not a sales-call maze.",
   },
 ] as const;
 
-export const INQUIRY_SERVICES = ["Visual identity", "Website", "Marketing", "Not sure yet"] as const;
-
-export const INQUIRY_BUDGETS = [
-  "Under $5k",
-  "$5k – $15k",
-  "$15k – $40k",
-  "$40k+",
+export const INQUIRY_SERVICES = [
+  "Storefront & conversion",
+  "Positioning & strategy",
+  "Trailers & motion",
+  "Campaigns & creators",
   "Not sure yet",
 ] as const;
 
-export const INQUIRY_TIMELINES = ["As soon as possible", "1–3 months", "3–6 months", "Just exploring"] as const;
+export const INQUIRY_STAGES = [
+  "Pre-announce",
+  "Announced, release 3–12 months out",
+  "Release window",
+  "Already launched",
+] as const;
+
+export const INQUIRY_BUDGETS = ["Under $5k", "$5k – $15k", "$15k – $40k", "$40k+", "Not sure yet"] as const;
+
+export const STUDIO_EMAIL = "hello@retrovision.gg";

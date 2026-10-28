@@ -16,7 +16,7 @@ function Row({ reverse = false, outlined = false }: { reverse?: boolean; outline
           <li
             key={i}
             aria-hidden={i >= MARQUEE_ITEMS.length}
-            className="flex shrink-0 items-center gap-8 pr-8 text-[clamp(1.75rem,3.6vw,3.25rem)] leading-none font-extrabold tracking-[-0.02em] uppercase"
+            className="flex shrink-0 items-center gap-8 pr-8 font-display text-[clamp(1.75rem,3.6vw,3.25rem)] leading-none font-bold tracking-[-0.02em] uppercase"
           >
             <span
               className={
@@ -27,7 +27,7 @@ function Row({ reverse = false, outlined = false }: { reverse?: boolean; outline
             >
               {item}
             </span>
-            <span aria-hidden="true" className="size-2.5 rotate-45 bg-accent" />
+            <span aria-hidden="true" className="size-2.5 rotate-45 bg-accent-red" />
           </li>
         ))}
       </ul>

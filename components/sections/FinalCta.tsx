@@ -27,19 +27,28 @@ export default function FinalCta() {
         <Reveal className="max-w-2xl">
           <h2
             id="final-cta-title"
-            className="text-[clamp(2.25rem,4.6vw,4rem)] leading-[1.06] font-extrabold tracking-[-0.02em] text-balance text-fg"
+            className="text-[clamp(2.25rem,4.6vw,4rem)] leading-[1.06] font-bold tracking-[-0.02em] text-balance text-fg"
           >
             Your world is ready.{" "}
-            <span className="bg-[linear-gradient(90deg,#02adff,#8b5cf6)] bg-clip-text text-transparent">
-              Let&apos;s bring the players in.
+            <span className="bg-[linear-gradient(90deg,#2aa8ef,#7b5ce0,#e6464f)] bg-clip-text text-transparent">
+              Let&apos;s make it impossible to ignore.
             </span>
           </h2>
           <p className="mt-6 max-w-lg text-lg leading-[1.65] text-fg-muted">
-            One team for your identity, website and launch. Tell us about your game and we&apos;ll come back with a plan.
+            Positioning, storefront, trailers and campaigns on one thread — so the moment players arrive, they
+            understand, wishlist and buy.
           </p>
           <ButtonLink href={PRIMARY_CTA.href} arrow="up-right" className="mt-10">
             {PRIMARY_CTA.label}
           </ButtonLink>
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-[0.08em] text-fg-muted uppercase">
+            {["No account", "No calendar link", "Scope before commitment"].map((item) => (
+              <li key={item} className="flex items-center gap-2">
+                <span aria-hidden="true" className="size-1.5 bg-accent-red" />
+                {item}
+              </li>
+            ))}
+          </ul>
         </Reveal>
       </Container>
     </section>

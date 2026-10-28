@@ -4,6 +4,7 @@ import ButtonLink from "@/components/ui/ButtonLink";
 import Container from "@/components/ui/Container";
 import SplitChars from "@/components/motion/SplitChars";
 import HeroArtMotion from "@/components/visuals/HeroArtMotion";
+import { HERO_COPY } from "@/data/content";
 import { PRIMARY_CTA, SECTION_IDS } from "@/data/site";
 
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as CSSProperties;
@@ -61,19 +62,17 @@ export default function Hero() {
 
           <h1
             id="hero-title"
-            className="mt-6 text-[clamp(2.125rem,9.4vw,2.625rem)] leading-[1.08] font-extrabold tracking-[-0.02em] text-balance md:mt-7 md:text-[clamp(2.25rem,4vw,4rem)]"
+            className="mt-6 text-[clamp(2.125rem,9.4vw,2.625rem)] leading-[1.08] font-bold tracking-[-0.02em] text-balance md:mt-7 md:text-[clamp(2.25rem,4vw,4rem)]"
           >
             <SplitChars text="Games Deserve Greatness." delay={160} className="text-[#f1f5f9]" />
-            <SplitChars text="We Make It Happen." delay={420} gradient={["#02adff", "#8b5cf6"]} />
+            <SplitChars text="We Make It Happen." delay={420} gradient={["#2aa8ef", "#7b5ce0", "#e6464f"]} />
           </h1>
 
           <p
             className="enter mt-5 max-w-[35rem] text-[1.0625rem] leading-[1.65] text-pretty text-fg-muted md:mt-6 md:text-[clamp(1.0625rem,1.08vw,1.1875rem)]"
             style={delay(760)}
           >
-            Retro Vision is a creative and growth studio for game developers. We shape the visual
-            identity, build the website, and run the marketing that turns a great game into one players
-            find, remember, and can&apos;t wait to play.
+            {HERO_COPY}
           </p>
 
           <div

@@ -3,7 +3,7 @@ title: Retro Vision — PRD
 product: Retro Vision
 type: PRD
 status: Draft v1
-source: "Shahriar-এর chat brief (2026-10-22) — 'Section 01: Navbar + Hero'। Vault-এ এখনো কোনো Retro Vision note নেই"
+source: "Shahriar-এর chat brief (2026-10-22) + Heinzsauce-এর services.txt ও লাইভ site retro-vision-games.lovable.app (2026-10-29) — content-এর source of truth"
 created: 2026-10-22
 updated: 2026-10-22
 ---
@@ -131,3 +131,19 @@ Hero ── headline + description পড়ে
 | Primary conversion | Project inquiry |
 | Stack | Next.js 16.4 · React 19.3 · Tailwind v4 · TypeScript |
 | Backend | এখন নেই (Phase 4-এ Resend দিয়ে form) |
+
+## v7 (2026-10-29) — আসল positioning
+
+Retro_Vision = **full-service marketing for games**, Steam-কেন্দ্রিক। চারটা discipline, ১৬টা service (`data/content.ts → SERVICE_CATEGORIES`):
+
+| Discipline | Services |
+|---|---|
+| Storefront & Conversion | Store Audit · Copywriting · Steam Assets · Localization |
+| Positioning & Strategy | Core Premise · Audience Intel · Launch Roadmap · Festival Strategy |
+| Trailers & Motion | Storyboarding · Cut & Edit · Gameplay Capture · Audio Design |
+| Campaigns & Creators | Outreach · Creator Campaigns · Community Ops · Paid Distribution |
+
+Packages: Launch Readiness (4–8 সপ্তাহ) · Wishlist Growth (12–24, most common start) · Momentum Buildup (8–14)। দাম scope-এর পরে। Reply: ৪৮ ঘণ্টার মধ্যে মানুষ। Studio email: hello@retrovision.gg।
+
+- FR-3.1 — Services tabs (WAI-ARIA, arrow/Home/End), ১৬টা service সব DOM-এ
+- FR-3.2 — Inquiry form-এ "stage" field (Pre-announce … Already launched); error-এর পর সব মান ফেরত থাকে

@@ -1,35 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import SiteFooter from "@/components/layout/SiteFooter";
 import SiteHeader from "@/components/layout/SiteHeader";
 import CursorRing from "@/components/motion/CursorRing";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
+// Brand type: Space Grotesk (display), Inter (body), JetBrains Mono (labels).
+const spaceGrotesk = Space_Grotesk({ variable: "--font-space-grotesk", subsets: ["latin"], display: "swap" });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
+const jetbrainsMono = JetBrains_Mono({ variable: "--font-jetbrains-mono", subsets: ["latin"], display: "swap" });
 
 // Set NEXT_PUBLIC_SITE_URL in production to emit canonical and absolute OG URLs.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-const title = "Retro Vision — Creative & Growth Studio for Game Developers";
+const title = "Retro_Vision — Full-service marketing for games";
 const description =
-  "Visual identity, game websites and launch marketing for indie developers and studios. One team that helps your game find the players it was made for.";
+  "Positioning, Steam storefronts, trailers and creator campaigns for ambitious game developers. One partner connecting your hook, your store page and your launch.";
 
 export const metadata: Metadata = {
   ...(siteUrl && { metadataBase: new URL(siteUrl), alternates: { canonical: "/" } }),
   title,
   description,
-  openGraph: { title, description, type: "website", siteName: "Retro Vision" },
+  openGraph: { title, description, type: "website", siteName: "Retro_Vision" },
   twitter: { card: "summary_large_image", title, description },
 };
 
@@ -48,7 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       id="top"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${jakarta.variable} ${plexMono.variable} antialiased`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

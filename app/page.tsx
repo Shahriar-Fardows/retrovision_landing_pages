@@ -10,8 +10,8 @@ import Process from "@/components/sections/Process";
 import Services from "@/components/sections/Services";
 import Work from "@/components/sections/Work";
 
-// Rhythm: open hero → tight marquee → open statement → dense problems/services →
-// controlled process → image-led work → offer → FAQ → focused form → closing CTA.
+// Rhythm: open hero → tight marquee → why us → problems → services → image-led work →
+// packages → what happens next → FAQ → focused form → closing CTA. Backgrounds alternate.
 export default function Home() {
   return (
     <>
@@ -20,9 +20,9 @@ export default function Home() {
       <About />
       <Problems />
       <Services />
-      <Process />
       <Work />
       <Engagement />
+      <Process />
       <Faq />
       <Inquiry />
       <FinalCta />

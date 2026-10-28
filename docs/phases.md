@@ -91,3 +91,14 @@ updated: 2026-10-22
 - [x] Hero art-এর বাঁ দিক lift (source আলাদা রাখা, script দিয়ে grade)
 - [x] Light / dark theme + toggle, flash ছাড়া
 - [x] "What we build" — তিনটা আলাদা code-drawn visual
+
+## 2026-10-29 — v7: আসল brand ও content
+
+- [x] আসল logo (header, footer), favicon
+- [x] Space Grotesk / Inter / JetBrains Mono
+- [x] Logo থেকে রঙ (নীল #0092d7, লাল #e6464f), দুই theme-এ AA
+- [x] Content: লাইভ site + services.txt (problems, why, ১৬ service, packages, process, FAQ, CTA)
+- [x] Services tabs, packages, নতুন storefront/trailer visual
+- [x] Form-এ stage field; select-এর মান error-এর পর হারানোর bug ঠিক
+- [ ] Heinzsauce/Shahriar-এর copy review
+- [ ] Social link (লাইভ site-এ placeholder — আসলগুলো লাগবে)
