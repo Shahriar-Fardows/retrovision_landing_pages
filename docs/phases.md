@@ -102,3 +102,14 @@ updated: 2026-10-22
 - [x] Form-এ stage field; select-এর মান error-এর পর হারানোর bug ঠিক
 - [ ] Heinzsauce/Shahriar-এর copy review
 - [ ] Social link (লাইভ site-এ placeholder — আসলগুলো লাগবে)
+
+## 2026-11-03 — v8: main site-এর সাথে মেলানো
+
+- [x] Main site বিশ্লেষণ (token, section, component markup)
+- [x] ১৮টা ছবি `public/images/site/`
+- [x] Light-only token + dark ink panel; toggle বাদ
+- [x] Floating pill navbar, main-site hero
+- [x] Problems · Services (+scope) · Packages · Process · Why · Insights · FAQ · CTA+form · Footer
+- [x] পুরনো art, WebGL motion, marquee, cursor, unused section মুছে ফেলা
+- [x] AA contrast মাপা, 360–1920px overflow ০
+- [ ] Main site-এর domain স্থায়ী হলে `MAIN_SITE` বদলানো

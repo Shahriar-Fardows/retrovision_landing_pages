@@ -1,69 +1,77 @@
 @import "tailwindcss";
 
-/* Design tokens — see docs/design.md */
+/* Design tokens mirror the main site (retro-vision-games.lovable.app) — see docs/design.md.
+   Light page; selected sections pin data-theme="dark" (the site's "ink" panels). */
 @theme {
-  --color-bg: #050a14;
-  --color-surface: #0a1120;
-  --color-surface-2: #111a2c;
-  --color-line: rgb(148 163 184 / 0.18);
-  --color-line-strong: rgb(148 163 184 / 0.35);
-  --color-fg: #f5f7fb;
-  --color-fg-muted: #a8b6cc;
-  --color-fg-subtle: #8492a9;
-  /* Brand colours come from the 3D-glasses logo: blue lens, red lens. */
-  --color-accent: #0092d7; /* logo blue — fills: buttons, rules, markers */
-  --color-accent-ink: #2aa8ef; /* blue text — 7.5:1 on bg; darker in light theme */
-  --color-accent-red: #e6464f; /* logo red — markers and the brand gradient */
-  --color-accent-violet: #7b5ce0; /* midpoint of the blue→red brand gradient */
-  --color-on-accent: #03101c; /* 5.6:1 on logo blue */
-  --color-danger: #ff8a8a; /* form errors — 8:1 on surface */
+  --color-bg: oklch(98.5% 0.003 240); /* page background */
+  --color-surface: oklch(100% 0 0); /* paper: cards, panels */
+  --color-surface-2: oklch(96% 0.008 240); /* muted */
+  --color-slate: oklch(92.5% 0.012 235); /* canvas-slate section */
+  --color-quartz: oklch(93% 0.009 240); /* canvas-quartz section */
+  --color-ink: oklch(16% 0.02 245); /* dark panels and footer */
+  --color-paper: oklch(100% 0 0);
+  --color-line: oklch(90% 0.012 240);
+  --color-line-strong: oklch(16% 0.02 245 / 0.12);
+  --color-fg: oklch(16% 0.02 245);
+  --color-fg-muted: oklch(48% 0.02 245); /* ~6:1 on paper */
+  --color-fg-subtle: oklch(52% 0.02 245); /* ~5:1 on paper */
+  --color-accent: oklch(62% 0.16 235); /* brand blue — dots, rules, highlights */
+  --color-accent-strong: oklch(52% 0.15 238); /* blue behind white text (AA) */
+  --color-accent-ink: oklch(50% 0.15 240); /* blue text on light */
+  --color-accent-red: oklch(62% 0.22 25); /* brand red */
+  --color-accent-violet: oklch(55% 0.2 280); /* anaglyph midpoint */
+  --color-on-accent: oklch(100% 0 0);
+  --color-danger: oklch(52% 0.2 25);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
   --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-xl: 0.75rem;
 
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-card: 0 1px 2px oklch(16% 0.02 245 / 0.04), 0 8px 24px -8px oklch(16% 0.02 245 / 0.08);
+  --shadow-card-hover: 0 1px 2px oklch(16% 0.02 245 / 0.04), 0 20px 40px -12px oklch(16% 0.02 245 / 0.18);
+  --shadow-depth: 0 1px 3px oklch(16% 0.02 245 / 0.1), 0 0 24px oklch(16% 0.02 245 / 0.08),
+    0 14px 28px -10px oklch(16% 0.02 245 / 0.2);
+  --shadow-depth-hover: 0 2px 5px oklch(16% 0.02 245 / 0.12), 0 0 30px oklch(16% 0.02 245 / 0.1),
+    0 22px 38px -10px oklch(16% 0.02 245 / 0.25);
+  --shadow-glow-blue: 0 10px 40px -10px oklch(62% 0.16 235 / 0.45);
+  --shadow-glow-red: 0 10px 40px -10px oklch(62% 0.22 25 / 0.45);
+  --shadow-card-glow-blue: 0 1px 2px oklch(16% 0.02 245 / 0.05), 0 18px 36px -12px oklch(16% 0.02 245 / 0.16),
+    0 0 32px -4px oklch(62% 0.16 235 / 0.35);
+  --shadow-card-glow-red: 0 1px 2px oklch(16% 0.02 245 / 0.05), 0 18px 36px -12px oklch(16% 0.02 245 / 0.16),
+    0 0 32px -4px oklch(62% 0.22 25 / 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root {
-  --header-h: 5.625rem;
-  color-scheme: dark;
-}
-
-/* Themes. The html element carries the visitor's choice (set before paint by the
-   inline script in layout.tsx). Image-backed sections pin data-theme="dark", so
-   the dark values are restated here for nested scopes, not only on :root. */
-[data-theme="dark"] {
-  --color-bg: #050a14;
-  --color-surface: #0a1120;
-  --color-surface-2: #111a2c;
-  --color-line: rgb(148 163 184 / 0.18);
-  --color-line-strong: rgb(148 163 184 / 0.35);
-  --color-fg: #f5f7fb;
-  --color-fg-muted: #a8b6cc;
-  --color-fg-subtle: #8492a9;
-  --color-accent-ink: #2aa8ef;
-  --color-danger: #ff8a8a;
-  color-scheme: dark;
-}
-
-/* Light: AA text on #f4f6fa — fg 17:1, muted 7.3:1, subtle 5.2:1, ink 5.4:1. */
-[data-theme="light"] {
-  --color-bg: #f4f6fa;
-  --color-surface: #ffffff;
-  --color-surface-2: #e9eef6;
-  --color-line: rgb(15 23 42 / 0.1);
-  --color-line-strong: rgb(15 23 42 / 0.2);
-  --color-fg: #0b1220;
-  --color-fg-muted: #44526a;
-  --color-fg-subtle: #5b6880;
-  --color-accent-ink: #006aa3;
-  --color-danger: #c53030;
+  --header-h: 4.5rem;
+  --gradient-anaglyph: linear-gradient(
+    135deg,
+    oklch(62% 0.16 235) 0%,
+    oklch(55% 0.2 280) 50%,
+    oklch(62% 0.22 25) 100%
+  );
   color-scheme: light;
+}
+
+/* The main site's dark "ink" panels: hero, packages, insights, CTA card, footer. */
+[data-theme="dark"] {
+  --color-bg: oklch(16% 0.02 245);
+  --color-surface: oklch(20.5% 0.016 245);
+  --color-surface-2: oklch(24% 0.018 245);
+  --color-line: oklch(100% 0 0 / 0.12);
+  --color-line-strong: oklch(100% 0 0 / 0.16);
+  --color-fg: oklch(100% 0 0);
+  --color-fg-muted: oklch(100% 0 0 / 0.72);
+  --color-fg-subtle: oklch(100% 0 0 / 0.55);
+  --color-accent-ink: oklch(72% 0.13 235);
+  --color-danger: oklch(72% 0.16 25);
+  color-scheme: dark;
 }
 
 html {
@@ -73,7 +81,8 @@ html {
 /* Headings speak in the brand's display face; body copy stays in Inter. */
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: var(--font-display);
 }
 
@@ -85,9 +94,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Future sections land below the header, not under it. */
 [id] {
-  scroll-margin-top: calc(var(--header-h) + 1rem);
+  scroll-margin-top: calc(var(--header-h) + 1.5rem);
 }
 
 :focus-visible {
@@ -101,7 +109,86 @@ body {
   color: var(--color-on-accent);
 }
 
-/* Entrance motion: one pass, staggered via --delay. */
+/* ——— Main-site signatures ——— */
+
+/* Marker-pen highlight under the key phrase of a heading. */
+.highlight-blue {
+  background: linear-gradient(transparent 60%, oklch(62% 0.16 235 / 0.22) 60%);
+  padding: 0 0.15em;
+}
+.highlight-red {
+  background: linear-gradient(transparent 60%, oklch(62% 0.22 25 / 0.22) 60%);
+  padding: 0 0.15em;
+}
+
+/* Blue → violet → red, like the logo's 3D-glasses frame. */
+.text-anaglyph {
+  background-image: var(--gradient-anaglyph);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Paragraph with a coloured rule on its left edge. */
+.description-rail {
+  border-left: 2px solid var(--color-accent);
+  padding-left: 1rem;
+}
+.description-rail-red {
+  border-left-color: var(--color-accent-red);
+}
+.description-rail-paper {
+  border-left-color: var(--color-paper);
+}
+
+/* Faint film grain over atmospheric sections. */
+.bg-grain {
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+  background-size: 220px 220px;
+}
+
+/* Fine "+" grid used behind the process timeline. */
+.bg-plus-grid {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='44' height='44'><path d='M22 18v8M18 22h8' stroke='%23182032' stroke-opacity='0.12' stroke-width='1'/></svg>");
+}
+
+/* Thin vertical lines behind the packages panel. */
+.bg-line-field {
+  background-image: linear-gradient(90deg, oklch(100% 0 0 / 0.045) 1px, transparent 1px);
+  background-size: 56px 100%;
+}
+
+/* Dark cards light up from one corner on hover — the site's "signal" cards. */
+.card-signal {
+  isolation: isolate;
+  position: relative;
+}
+.card-signal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent, var(--sig) 50%, transparent) var(--sig-x, 100%) 0 / 45% 1px no-repeat,
+    radial-gradient(70% 85% at var(--sig-x, 100%) 0%, color-mix(in oklab, var(--sig) 26%, transparent), transparent 70%),
+    radial-gradient(40% 50% at calc(100% - var(--sig-x, 100%)) 100%, color-mix(in oklab, var(--sig) 10%, transparent), transparent 70%);
+  opacity: 0.75;
+  transition:
+    opacity 0.5s,
+    filter 0.5s;
+}
+.card-signal:hover::before,
+.card-signal:focus-within::before {
+  opacity: 1;
+  filter: saturate(1.5) brightness(1.15);
+}
+
+/* ——— Motion ——— */
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -113,14 +200,23 @@ body {
   }
 }
 
-@keyframes settle {
+/* Slow drift on the hero art and a passing light veil, as on the main site. */
+@keyframes hero-ambient {
   from {
-    opacity: 0;
-    transform: scale(1.05);
+    transform: scale(1.04) translate3d(0, 0, 0);
   }
   to {
-    opacity: 1;
-    transform: none;
+    transform: scale(1.09) translate3d(-1.2%, -0.6%, 0);
+  }
+}
+
+@keyframes hero-veil {
+  0%,
+  100% {
+    transform: translateX(-12%);
+  }
+  50% {
+    transform: translateX(12%);
   }
 }
 
@@ -129,83 +225,12 @@ body {
   animation-delay: var(--delay, 0ms);
 }
 
-.enter-backdrop {
-  animation: settle 1800ms var(--ease-out) both;
+.animate-hero-ambient {
+  animation: hero-ambient 24s ease-in-out infinite alternate;
 }
 
-/* Hero headline: characters rise and un-tilt one after another. */
-@keyframes char-rise {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 0.55em, 0) rotateX(-70deg);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.split-line {
-  display: block;
-  perspective: 600px;
-}
-
-.split-char {
-  display: inline-block;
-  transform-origin: 50% 100%;
-  animation: char-rise 900ms cubic-bezier(0.215, 0.61, 0.355, 1) both;
-  animation-delay: var(--char-delay, 0ms);
-}
-
-/* Light glints running along the hero's bottom hairline. */
-@keyframes glint {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  15%,
-  85% {
-    opacity: 1;
-  }
-  to {
-    transform: translateX(400%);
-    opacity: 0;
-  }
-}
-
-.glint {
-  animation: glint 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  animation-delay: var(--glint-delay, 0ms);
-}
-
-/* Gentle vertical bob for the scroll cue. */
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateY(-3px);
-  }
-  50% {
-    transform: translateY(4px);
-  }
-}
-
-.bob {
-  animation: bob 2.8s ease-in-out infinite;
-}
-
-/* Infinite marquee: the track holds two copies and slides by one copy. */
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-track {
-  animation: marquee var(--marquee-duration, 40s) linear infinite;
-}
-
-.marquee-track[data-reverse="true"] {
-  animation-direction: reverse;
+.animate-hero-veil {
+  animation: hero-veil 16s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -213,11 +238,8 @@ body {
     scroll-behavior: auto;
   }
   .enter,
-  .enter-backdrop,
-  .split-char,
-  .glint,
-  .bob,
-  .marquee-track {
+  .animate-hero-ambient,
+  .animate-hero-veil {
     animation: none;
   }
   *,

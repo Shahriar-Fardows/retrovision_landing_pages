@@ -147,3 +147,7 @@ Packages: Launch Readiness (4–8 সপ্তাহ) · Wishlist Growth (12–2
 
 - FR-3.1 — Services tabs (WAI-ARIA, arrow/Home/End), ১৬টা service সব DOM-এ
 - FR-3.2 — Inquiry form-এ "stage" field (Pre-announce … Already launched); error-এর পর সব মান ফেরত থাকে
+
+## v8 (2026-11-03)
+
+Landing page = main site (retro-vision-games.lovable.app)-এর home-এর মতো, সাথে দুইটা বাড়তি জিনিস: পূর্ণ ১৬-service scope (tabs) আর CTA card-এর ভেতরে কাজ করা inquiry form। Hero copy main site-এর: "Your game also deserves the spotlight."। Editorial/FAQ/Privacy link main site-এ যায় (`MAIN_SITE`)।

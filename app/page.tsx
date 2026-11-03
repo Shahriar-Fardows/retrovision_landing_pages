@@ -1,31 +1,27 @@
-import About from "@/components/sections/About";
-import Engagement from "@/components/sections/Engagement";
 import Faq from "@/components/sections/Faq";
-import FinalCta from "@/components/sections/FinalCta";
 import Hero from "@/components/sections/Hero";
 import Inquiry from "@/components/sections/Inquiry";
-import Marquee from "@/components/sections/Marquee";
+import Insights from "@/components/sections/Insights";
+import Packages from "@/components/sections/Packages";
 import Problems from "@/components/sections/Problems";
 import Process from "@/components/sections/Process";
 import Services from "@/components/sections/Services";
-import Work from "@/components/sections/Work";
+import Why from "@/components/sections/Why";
 
-// Rhythm: open hero → tight marquee → why us → problems → services → image-led work →
-// packages → what happens next → FAQ → focused form → closing CTA. Backgrounds alternate.
+// Same order and rhythm as the main site: ink hero → paper → slate → ink → paper →
+// paper → ink → quartz → closing card (with the inquiry form).
 export default function Home() {
   return (
     <>
       <Hero />
-      <Marquee />
-      <About />
       <Problems />
       <Services />
-      <Work />
-      <Engagement />
+      <Packages />
       <Process />
+      <Why />
+      <Insights />
       <Faq />
       <Inquiry />
-      <FinalCta />
     </>
   );
 }

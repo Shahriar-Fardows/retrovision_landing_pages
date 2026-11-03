@@ -32,7 +32,7 @@ export default function ServiceTabs({ categories }: { categories: readonly Servi
   };
 
   return (
-    <div className="mt-14 grid gap-10 md:mt-20 lg:grid-cols-12 lg:gap-12">
+    <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-12">
       <div
         role="tablist"
         aria-label="Service categories"
@@ -55,9 +55,9 @@ export default function ServiceTabs({ categories }: { categories: readonly Servi
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(i)}
               onKeyDown={onKeyDown}
-              className={`group relative flex shrink-0 items-baseline gap-4 rounded-sm border px-5 py-4 text-left transition-colors duration-200 lg:border-0 lg:border-l-2 lg:px-6 lg:py-5 ${
+              className={`group relative flex shrink-0 items-baseline gap-4 rounded-md border px-5 py-4 text-left transition-colors duration-200 lg:rounded-none lg:border-0 lg:border-l-2 lg:px-6 lg:py-5 ${
                 selected
-                  ? "border-accent bg-surface text-fg lg:border-l-accent"
+                  ? "border-accent bg-paper text-fg shadow-[var(--shadow-card)] lg:border-l-accent"
                   : "border-line-strong text-fg-muted hover:text-fg lg:border-l-line-strong"
               }`}
             >
@@ -82,19 +82,19 @@ export default function ServiceTabs({ categories }: { categories: readonly Servi
           tabIndex={0}
           className="outline-none lg:col-span-8"
         >
-          <p className="font-display text-[clamp(1.375rem,2.2vw,1.875rem)] leading-snug font-bold text-balance text-fg">
-            “{category.tagline}”
+          <p className="description-rail text-xl leading-snug font-semibold text-balance text-fg md:text-2xl">
+            {category.tagline}
           </p>
-          <ul className="mt-8 grid gap-px overflow-hidden rounded-md border border-line-strong bg-line-strong sm:grid-cols-2">
+          <ul className="mt-8 grid gap-px overflow-hidden rounded-xl border border-line-strong bg-line-strong shadow-[var(--shadow-card)] sm:grid-cols-2">
             {category.services.map((service) => (
-              <li key={service.name} className="flex flex-col bg-bg p-6">
+              <li key={service.name} className="flex flex-col bg-paper p-6">
                 <h4 className="font-display text-lg font-bold text-fg">{service.name}</h4>
                 <p className="mt-2 flex-1 leading-[1.6] text-fg-muted">{service.focus}</p>
                 <ul aria-label={`${service.name} options`} className="mt-5 flex flex-wrap gap-2">
                   {service.variants.map((variant) => (
                     <li
                       key={variant}
-                      className="rounded-xs border border-line-strong px-2.5 py-1 font-mono text-[11px] text-fg-muted"
+                      className="rounded-sm border border-line px-2.5 py-1 font-mono text-[11px] text-fg-muted"
                     >
                       {variant}
                     </li>

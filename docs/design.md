@@ -232,3 +232,31 @@ Error color: `--color-danger: #ff8a8a` (form)।
 | Brand gradient | `#2aa8ef → #7b5ce0 → #e6464f` (hero line 2, final CTA, package highlight) | Logo frame + লাইভ site |
 
 নাম সবসময় `Retro_Vision` (underscore সহ), tagline: "Making games impossible to ignore."
+
+## v8 (2026-11-03) — main site-এর হুবহু design system
+
+> **এটাই এখন source of truth।** উপরের v1–v7-এর যেখানে অমিল, এই অংশ জেতে। Reference: retro-vision-games.lovable.app (Shahriar: "এটাই আমাদের main website")।
+
+**Theme:** শুধু light page; hero, packages, insights, CTA card, footer আর কিছু card `data-theme="dark"` (ink panel)। Toggle বাদ।
+
+| Token | মান | কোথায় |
+|---|---|---|
+| `bg` | `oklch(98.5% .003 240)` | page |
+| `surface` / `paper` | `oklch(100% 0 0)` | card, problems/process/why |
+| `slate` | `oklch(92.5% .012 235)` | services |
+| `quartz` | `oklch(93% .009 240)` | FAQ |
+| `surface-2` (muted) | `oklch(96% .008 240)` | CTA wrapper |
+| `ink` | `oklch(16% .02 245)` | dark panel |
+| `fg-muted` | `oklch(48% .02 245)` — 6.5:1 paper | body |
+| `accent` | `oklch(62% .16 235)` brand blue | dot, rule, highlight |
+| `accent-strong` | `oklch(52% .15 238)` — সাদা লেখা 5.2:1 | button (main site-এর রঙ সাদা লেখায় 3.4:1, তাই সামান্য গাঢ়) |
+| `accent-red` | `oklch(62% .22 25)` | marker square, red highlight |
+| Anaglyph | `linear-gradient(135deg, blue, oklch(55% .2 280), red)` | `.text-anaglyph` |
+
+**Signature pattern (`app/globals.css`):** `.highlight-blue/-red` (নিচের 40%-এ 22% রঙ) · `.text-anaglyph` · `.description-rail(-red/-paper)` · `.card-signal` (hover-এ কোণ থেকে আলো) · `.bg-grain` · `.bg-plus-grid` · `.bg-line-field`। Radius: button 10px, card 12px, navbar/CTA pill। Shadow: `--shadow-card`, `--shadow-depth`, glow-blue/red।
+
+**Section ক্রম:** Hero (ink) → Problems (paper) → Services + full scope tabs (slate) → Packages (ink) → Process (paper) → Why (paper) → Insights (ink) → FAQ (quartz) → CTA card + form (muted) → Footer (ink)।
+
+**ছবি:** `public/images/site/` — main site থেকে ১৮টা (Shahriar-এর অনুমতিতে, 2026-11-03)।
+
+**Motion:** hero art-এর ধীর drift (24s), veil sheen (16s), content-এর fade-up, section reveal (GSAP)। Split-letter, marquee, cursor ring, cape WebGL বাদ — main site-এ নেই।

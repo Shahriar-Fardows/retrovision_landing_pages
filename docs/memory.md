@@ -89,6 +89,10 @@ v3 শেষ — Shahriar-এর review-এর অপেক্ষা। Art এ�
 | A20 | Content-এর source of truth = লাইভ site (retro-vision-games.lovable.app) + services.txt | Studio-র নিজের লেখা; আমার আগের placeholder copy বাতিল |
 | A21 | Hero headline ও eyebrow রাখা, paragraph বদলানো | Headline Shahriar নিজে বেছেছিলেন; paragraph আগে ভুল service বলছিল |
 | A22 | Social link দেখানো হয়নি | লাইভ site-এ শুধু x.com/discord.gg-এর মূল page — আসল account নয় |
+| A23 | Design = main site-এর হুবহু (token, pattern, ছবি, ক্রম) | Shahriar: main site-ই source of truth (2026-11-03) |
+| A24 | Light-only, toggle নেই | Shahriar-এর উত্তর; main site-এ dark mode নেই |
+| A25 | Button-এর নীল main site-এর চেয়ে সামান্য গাঢ় (`accent-strong`) | সাদা লেখায় AA (5.2:1); main site-এর রঙে 3.4:1 |
+| A26 | Newsletter form বানানো হয়নি; main site-এ subscribe-এর link | Backend নেই, ভুয়া form নয় |
 | A14 | Pubzi-র code/asset copy নয়, শুধু pattern | Paid Envato template — license ছাড়া copy করা যায় না |
 | A15 | Testimonial, client logo, counter, দাম নেই | যাচাইকৃত data নেই (`00 §93–94`); Shahriar: দাম ছাড়া engagement |
 | A16 | Inquiry → `INQUIRY_TO_EMAIL=shahriarfardows@gmail.com` | Shahriar-এর উত্তর (2026-10-22) |
@@ -125,6 +129,7 @@ v3 শেষ — Shahriar-এর review-এর অপেক্ষা। Art এ�
 | 2026-10-22 | v5: পুরো landing page — Pubzi (ex-coders, Envato) থেকে motion pattern নিজের কোডে; GSAP যোগ; inquiry → Resend |
 | 2026-10-22 | v6: hero art-এর বাঁ দিক lift; light/dark theme; What we build-এ তিনটা আলাদা visual |
 | 2026-10-29 | v7: আসল logo, font, রঙ; লাইভ site + services.txt থেকে সব content; services tabs; packages; form stage field |
+| 2026-11-03 | v8: main site-এর design system হুবহু — light-only, pill navbar, main-site hero ও ছবি, সব section তার ক্রমে; পুরনো art/WebGL/marquee/toggle বাদ |
 
 ## Notes for future sessions
 

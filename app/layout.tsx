@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import SiteFooter from "@/components/layout/SiteFooter";
 import SiteHeader from "@/components/layout/SiteHeader";
-import CursorRing from "@/components/motion/CursorRing";
 import "./globals.css";
 
 // Brand type: Space Grotesk (display), Inter (body), JetBrains Mono (labels).
@@ -26,36 +25,26 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050a14",
+  themeColor: "#f9fafb",
 };
-
-// Runs before first paint: saved choice, else the OS preference. Keeps in sync
-// with components/ui/ThemeToggle.tsx (same storage key).
-const themeScript = `(function(){try{var t=localStorage.getItem("rv-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       id="top"
-      data-theme="dark"
-      suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="min-h-full bg-bg text-fg">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-accent focus:px-4 focus:py-2 focus:text-on-accent"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-accent-strong focus:px-4 focus:py-2 focus:text-on-accent"
         >
           Skip to content
         </a>
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
-        <CursorRing />
       </body>
     </html>
   );

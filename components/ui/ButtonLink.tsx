@@ -1,49 +1,49 @@
 import type { ReactNode } from "react";
-import ArrowIcon from "@/components/ui/ArrowIcon";
+import { ArrowRight } from "@/components/ui/Icons";
 
 type ButtonLinkProps = {
   href: string;
   children: ReactNode;
-  variant?: "primary" | "outline" | "ghost";
-  arrow?: "up-right" | "right";
+  variant?: "primary" | "paper" | "pill" | "text";
   className?: string;
   onClick?: () => void;
+  external?: boolean;
+  /** Label left, arrow right (full-width card buttons). */
+  spread?: boolean;
 };
 
-const base =
-  "group inline-flex h-[3.375rem] items-center justify-center gap-3 px-6 text-[0.9375rem] font-semibold whitespace-nowrap transition-[background-color,color,border-color] duration-200 ease-[var(--ease-out)]";
-
+// The main site's button set: 10px-radius blocks, a pill in the navbar, and an
+// arrow that nudges right on hover.
 const variants = {
-  // Solid cyan — the one primary action per screen.
-  primary: "rounded-sm bg-accent px-[1.625rem] text-on-accent hover:bg-fg",
-  // Thin cyan border — navbar CTA.
-  outline:
-    "rounded-md border border-accent/80 bg-bg/20 text-fg hover:border-accent hover:bg-accent hover:text-on-accent",
-  // Thin light border — secondary action.
-  ghost: "rounded-sm border border-fg/55 px-[1.625rem] text-fg hover:border-fg hover:bg-fg/[0.06]",
+  // Blue block — used on light sections.
+  primary:
+    "h-12 rounded-md bg-accent-strong px-6 text-sm text-on-accent shadow-sm hover:bg-[oklch(46%_0.14_238)]",
+  // White block — used on dark panels and the hero.
+  paper: "h-12 rounded-md bg-paper px-6 text-sm text-ink shadow-sm hover:bg-[oklch(94%_0.01_240)]",
+  // Navbar call to action.
+  pill: "h-9 rounded-full bg-accent-strong px-4 text-sm text-on-accent hover:bg-[oklch(46%_0.14_238)]",
+  // Inline "Explore …" links.
+  text: "text-sm text-fg hover:text-accent-ink",
 };
 
 export default function ButtonLink({
   href,
   children,
   variant = "primary",
-  arrow,
   className = "",
   onClick,
+  external = false,
+  spread = false,
 }: ButtonLinkProps) {
   return (
-    <a href={href} onClick={onClick} className={`${base} ${variants[variant]} ${className}`}>
+    <a
+      href={href}
+      onClick={onClick}
+      {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+      className={`group inline-flex items-center ${spread ? "justify-between" : "justify-center"} gap-2 font-semibold whitespace-nowrap transition-[color,background-color,transform] duration-200 motion-safe:active:translate-y-px ${variants[variant]} ${className}`}
+    >
       {children}
-      {arrow && (
-        <ArrowIcon
-          direction={arrow}
-          className={`size-3.5 transition-transform duration-200 ease-[var(--ease-out)] ${
-            arrow === "up-right"
-              ? "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              : "group-hover:translate-x-1"
-          }`}
-        />
-      )}
+      <ArrowRight className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
     </a>
   );
 }
