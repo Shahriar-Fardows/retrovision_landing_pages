@@ -260,3 +260,41 @@ Error color: `--color-danger: #ff8a8a` (form)।
 **ছবি:** `public/images/site/` — main site থেকে ১৮টা (Shahriar-এর অনুমতিতে, 2026-11-03)।
 
 **Motion:** hero art-এর ধীর drift (24s), veil sheen (16s), content-এর fade-up, section reveal (GSAP)। Split-letter, marquee, cursor ring, cape WebGL বাদ — main site-এ নেই।
+
+## v9 (2026-11-03) — Ad landing page (free marketing audit)
+
+> Shahriar: "design system same type হবে, কিন্তু পুরো website copy নয় — ad run-এর জন্য better landing page লাগবে।" v8-এর **token ও pattern** থাকছে; **layout, section, copy** এখন ad conversion-এর জন্য নতুন। Standard: `00`, `16` (marketing — `13` নয়), `01`, `09`, `15` (§7 async button, §9 disabled নয়)।
+
+**Offer:** Free marketing audit · **Audience:** pre-launch indie dev · **Navbar:** logo + একটাই CTA (menu নেই)।
+
+```
+Hero (ink, OPEN)   copy বাঁয়ে 7col · request slip (paper, data-theme="light") ডানে 5col — form above the fold
+Pains (paper, TIGHT)        ৩টা worry — card নয়, ruled list
+Audit report (slate, OPEN)  deliverable-টাই দেখানো: paper report, 01–04 area × 3 check
+Steps (paper+plus-grid)     ৩ ধাপ, blue→violet→red rule
+Fit (paper, DENSE)          "A good fit" / "Probably not yet" split
+FAQ (quartz)                audit-নির্দিষ্ট ৫টা প্রশ্ন
+Final CTA (ink, FOCUSED)    "Your launch only happens once." → #free-audit
+Footer (ink, compact)       email · main site · privacy
+```
+
+**Brand-নির্দিষ্ট দিক:** content presentation (audit = report document) · request slip (dashed header, mono label) · navigation (শুধু CTA) · anaglyph typography।
+**Conversion:** সব CTA `#free-audit`-এ; UTM tag hidden field হয়ে email-এ যায়; submit button `aria-disabled` + guard (disabled নয়); success-এ form → receipt।
+**বাদ:** services tabs, packages, insights, why, process — ad visitor-এর সিদ্ধান্তে লাগে না।
+
+## v10 (2026-11-03) — v7 page ফেরত + main site-এর রঙ ও pattern
+
+> Shahriar: "1st-এর landing page-টাই better ছিল, শুধু কিছু change লাগত — main site-এর মতো navbar বা bg image কেন?" v8/v9 বাতিল। **e402120 (v7)-এর layout, navbar, warrior hero art + cape motion, light/dark toggle, services tabs, inquiry form** ফেরত। Main site থেকে **শুধু রঙ, font আর design pattern** নেওয়া।
+
+| নেওয়া | কোথায় |
+|---|---|
+| Ink/paper palette (oklch) দুই theme-এ | `app/globals.css` — dark = ink `oklch(16% .02 245)`, light = paper `oklch(98.5% .003 240)` |
+| Brand blue `#0092d7` (= logo blue), red `#ee343b`, violet `#6159e1` | accent token, hero gradient, capability visual |
+| Red-square eyebrow | `SectionHeading`, About, hero (sm+) |
+| Marker highlight (`.highlight-blue/-red`) | প্রতিটা section title-এর key phrase |
+| Anaglyph gradient (`.text-anaglyph`) | Inquiry ও Final CTA heading |
+| Description rail | SectionHeading intro (left-aligned) |
+| Radius md 10px | button/card |
+
+**নেওয়া হয়নি:** main site-এর navbar, hero image, section ক্রম, copy।
+**Contrast (মাপা):** button 5.6:1 · muted 10.2 (dark) / 6.8 (light) · subtle 6.9 / 5.7।

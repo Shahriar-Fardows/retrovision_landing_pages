@@ -1,42 +1,30 @@
-// Landing-page copy, taken from the main site (retro-vision-games.lovable.app) and
-// the studio's services breakdown. No invented clients, numbers, awards or testimonials.
+// Landing-page copy. Source of truth: Retro_Vision's services breakdown and the
+// studio's own site (retro-vision-games.lovable.app). No invented clients,
+// numbers, awards or testimonials.
 
-export const HERO = {
-  eyebrow: "Marketing for ambitious game developers",
-  copy: "Thousands of great games compete for attention every single year. Our mission is to help yours stand out from the crowd, reach the right players, and turn visibility into lasting interest.",
-  cta: "Find your starting point",
-} as const;
+export const HERO_COPY =
+  "Thousands of great games compete for attention every year. Retro_Vision connects your positioning, your Steam page and your launch so the right players instantly understand, wishlist and buy.";
 
-export const PURPOSE =
-  "We connect your positioning, store page, and launch so players instantly understand, wishlist, and purchase.";
-
-export const WHY_INTRO =
-  "We treat your launch as the objective, instead of just another billable account. That means honest advice, senior execution, and zero bloat, because your success is also our success.";
-
-export const WHY_POINTS = [
-  { title: "Senior attention", body: "The thinking stays close to the people doing the work.", icon: "user", tone: "blue" },
-  { title: "Connected disciplines", body: "Positioning, production and momentum share one direction.", icon: "layers", tone: "red" },
-  { title: "Fair scope", body: "We define what matters and leave out what does not.", icon: "scale", tone: "blue" },
-  { title: "Honest advice", body: "If another intervention matters more, we will say so.", icon: "compass", tone: "red" },
-  { title: "Your work stays yours", body: "Accounts, source files and documentation remain with you.", icon: "key", tone: "blue" },
+export const MARQUEE_ITEMS = [
+  "Store Audits",
+  "Steam Assets",
+  "Core Premise",
+  "Trailers",
+  "Creator Campaigns",
+  "Next Fest Strategy",
+  "Localization",
+  "Community Ops",
 ] as const;
 
-// The six pillars shown on the main site, each with its card art.
-export const PILLARS = [
-  { label: "Core premise", title: "Positioning", body: "We find the one hook that makes your game click in a sentence, then build every message around it.", image: "cap-positioning", tone: "blue" },
-  { label: "Store conversion", title: "Storefronts", body: "We rework capsules, trailer order, and page copy so visitors leave with a wishlist.", image: "cap-store", tone: "blue" },
-  { label: "Asset production", title: "Creative", body: "Trailers and key art built around what makes your game fun to play, not generic hype.", image: "cap-trailers", tone: "red" },
-  { label: "Direct outreach", title: "Audience", body: "We put the game in front of the creators, communities and players most likely to care.", image: "cap-creators", tone: "red" },
-  { label: "Release setup", title: "Launch", body: "Festivals, demos, press and release day planned as one build-up instead of scattered moments.", image: "cap-community", tone: "blue" },
-  { label: "Sustained growth", title: "Momentum", body: "Updates, sales and review follow-through that keep players arriving after launch week.", image: "cap-paid", tone: "blue" },
-] as const;
+export const ABOUT_STATEMENT =
+  "We connect your positioning, store page and launch so players instantly understand, wishlist and purchase. We treat your launch as the objective, not just another billable account.";
 
-// Articles from the main site's editorial (links go there).
-export const INSIGHTS = [
-  { kind: "Guide", minutes: 8, title: "The Steam Page Audit Worksheet", body: "The one-page audit our team runs before we touch a client's store page.", image: "insight-1", path: "/editorial/guides/steam-page-audit-worksheet" },
-  { kind: "Guide", minutes: 18, title: "Anatomy of a Trailer That Converts", body: "Frame-by-frame on the launch trailer that quadrupled wishlist velocity for a debut RPG.", image: "insight-2", path: "/editorial/guides/trailer-anatomy" },
-  { kind: "Analysis", minutes: 15, title: "Wishlist Decay in 2026", body: "The decay curve has changed. Here is the new one, with the caveats we're comfortable naming.", image: "insight-3", path: "/editorial/analysis/wishlist-decay-2026" },
-  { kind: "Guide", minutes: 14, title: "Creator Outreach That Isn't Spam", body: "The pitch template, the list-building method, and the four things that will get you blocked.", image: "case-1", path: "/editorial/guides/creator-outreach-that-works" },
+export const ABOUT_PRINCIPLES = [
+  { title: "Senior attention", body: "The thinking stays close to the people doing the work." },
+  { title: "Connected disciplines", body: "Positioning, production and momentum share one direction." },
+  { title: "Fair scope", body: "We define what matters and leave out what does not." },
+  { title: "Honest advice", body: "If another intervention matters more, we will say so." },
+  { title: "Your work stays yours", body: "Accounts, source files and documentation remain with you." },
 ] as const;
 
 export const PROBLEMS = [
@@ -216,10 +204,27 @@ export const PROCESS = [
   },
 ] as const;
 
+export const CAPABILITIES = [
+  {
+    title: "Steam storefronts",
+    body: "Capsules, screenshots, trailer order and page copy reworked so visitors leave with a wishlist.",
+    visual: "storefront",
+  },
+  {
+    title: "Trailers & motion",
+    body: "Announcement, gameplay and launch trailers built around what makes your game fun to play, not generic hype.",
+    visual: "trailer",
+  },
+  {
+    title: "Creator campaigns",
+    body: "Your game in front of the creators, communities and players most likely to care, around every public beat.",
+    visual: "campaign",
+  },
+] as const;
+
 export const PACKAGES = [
   {
     name: "Launch Readiness",
-    image: "pkg-readiness",
     duration: "4–8 weeks",
     stage: "Pre-announce → first public build",
     summary: "Positioning settled, the store page fixed and a dated plan in hand — before the one announcement you get.",
@@ -235,10 +240,9 @@ export const PACKAGES = [
   },
   {
     name: "Wishlist Growth",
-    image: "pkg-growth",
     duration: "12–24 weeks",
     stage: "Announced → 3–12 months from release",
-    summary: "An audience engine that runs every month, so wishlists keep climbing instead of waiting on a lucky post.",
+    summary: "An audience engine that runs every month, so the wishlist curve compounds instead of waiting on a lucky post.",
     includes: [
       "Content calendar & devlog system",
       "Creator outreach, rolling",
@@ -251,7 +255,6 @@ export const PACKAGES = [
   },
   {
     name: "Momentum Buildup",
-    image: "pkg-campaign",
     duration: "8–14 weeks",
     stage: "Release week → the quarter after",
     summary:
@@ -268,7 +271,8 @@ export const PACKAGES = [
   },
 ] as const;
 
-export const PACKAGES_NOTE = "Not sure? Choose the closest moment. The intake is not a commitment.";
+export const PACKAGES_NOTE =
+  "Not sure? Choose the closest moment. Packages are starting shapes — the intake is not a commitment.";
 
 export const FAQS = [
   {

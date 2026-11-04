@@ -1,73 +1,125 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import ButtonLink from "@/components/ui/ButtonLink";
-import { HERO } from "@/data/content";
-import { SECTION_IDS } from "@/data/site";
+import Container from "@/components/ui/Container";
+import SplitChars from "@/components/motion/SplitChars";
+import HeroArtMotion from "@/components/visuals/HeroArtMotion";
+import { HERO_COPY } from "@/data/content";
+import { PRIMARY_CTA, SECTION_IDS } from "@/data/site";
 
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as CSSProperties;
 
-// Mirrors the main site's hero: ink panel, drifting key art, two veils, grain and a
-// slow passing sheen; copy sits bottom-left on phones and centre-left on desktop.
+const HERO_IMAGE = "/images/retro-vision-hero.png";
+
 export default function Hero() {
   return (
+    // Night-time key art: the hero stays dark in both themes.
     <section
       data-theme="dark"
       aria-labelledby="hero-title"
-      className="relative min-h-[min(850px,92svh)] overflow-hidden bg-ink text-fg"
+      className="relative isolate flex min-h-svh flex-col overflow-hidden bg-bg text-fg"
     >
-      <div aria-hidden="true" className="absolute inset-0">
+      {/* Full-bleed key art. Decorative: the headline carries the meaning. */}
+      <div aria-hidden="true" className="enter-backdrop absolute inset-0 -z-20">
         <Image
-          src="/images/site/home-hero.jpg"
+          src={HERO_IMAGE}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="animate-hero-ambient object-cover object-[76%_center] sm:object-[62%_center]"
+          quality={80}
+          // Framing for the centred layout. On desktop the right value depends on aspect
+          // ratio, not width: the warrior stays clear of the headline and the animated
+          // cape tip stays on screen. Percentages only — HeroArtMotion reads this value.
+          className="object-cover object-[80%_100%] md:object-[68%_50%] xl:object-[60%_50%] xl:[@media(min-aspect-ratio:16/9)]:object-[40%_50%]"
         />
+        <HeroArtMotion />
       </div>
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/5" />
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-paper/15" />
-      <div aria-hidden="true" className="bg-grain absolute inset-0 opacity-25" />
+
+      {/* Readability for centred copy: top-down on phones; from tablet up an ellipse
+          darkens the middle behind the text while the warrior (right) and the dark
+          cliffs (left) stay visible. Plus a soft top edge for the nav and a bottom
+          fade into the next section. */}
       <div
         aria-hidden="true"
-        className="animate-hero-veil absolute inset-y-0 -inset-x-[8%] bg-[linear-gradient(105deg,transparent_15%,oklch(100%_0_0/0.12)_45%,transparent_72%)] opacity-20"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(4_9_20/0.92)_0%,rgb(4_9_20/0.84)_52%,rgb(4_9_20/0.35)_78%,rgb(4_9_20/0.55)_100%)] md:bg-[radial-gradient(ellipse_62%_58%_at_50%_50%,rgb(4_9_20/0.9)_0%,rgb(4_9_20/0.72)_50%,rgb(4_9_20/0.22)_100%)] lg:bg-[radial-gradient(ellipse_50%_56%_at_50%_50%,rgb(4_9_20/0.88)_0%,rgb(4_9_20/0.66)_52%,rgb(4_9_20/0.12)_100%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(4_9_20/0.55)_0%,transparent_20%,transparent_86%,rgb(5_10_20/0.9)_100%)]"
       />
 
-      <div className="relative mx-auto flex min-h-[min(850px,92svh)] max-w-7xl items-end px-6 pt-32 pb-20 lg:items-center lg:pt-28 lg:pb-10">
-        <div className="max-w-4xl">
+      <Container className="flex flex-1 items-start pt-[calc(var(--header-h)+2rem)] pb-[34svh] text-center md:items-center md:pt-[var(--header-h)] md:pb-12 lg:pb-0">
+        <div data-hero-focus className="flex w-full flex-col items-center">
           <p
-            className="enter inline-flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] text-fg/70 uppercase"
-            style={delay(60)}
+            className="enter flex items-center justify-center gap-3.5 font-mono text-[11px] tracking-[0.13em] text-fg-muted uppercase sm:text-xs"
+            style={delay(80)}
           >
-            <span aria-hidden="true" className="inline-block size-[0.55rem] bg-accent-red" />
-            {HERO.eyebrow}
+            <span aria-hidden="true" className="hidden size-2.5 shrink-0 bg-accent-red sm:inline-block" />
+            Independent thinking. Unforgettable execution.
           </p>
+
           <h1
             id="hero-title"
-            className="enter mt-6 max-w-4xl text-5xl leading-[0.94] font-bold tracking-[-0.02em] sm:text-6xl lg:text-7xl xl:text-[5.7rem]"
-            style={delay(140)}
+            className="mt-6 text-[clamp(2.125rem,9.4vw,2.625rem)] leading-[1.08] font-bold tracking-[-0.02em] text-balance md:mt-7 md:text-[clamp(2.25rem,4vw,4rem)]"
           >
-            Your game
-            <br />
-            also{" "}
-            <span className="text-anaglyph">
-              deserves
-              <br />
-              the spotlight.
-            </span>
+            <SplitChars text="Games Deserve Greatness." delay={160} className="text-[#f1f5f9]" />
+            <SplitChars text="We Make It Happen." delay={420} gradient={["#0092d7", "#6159e1", "#ee343b"]} />
           </h1>
+
           <p
-            className="enter description-rail description-rail-paper mt-7 max-w-2xl text-lg leading-relaxed text-fg/80 md:text-xl"
-            style={delay(260)}
+            className="enter mt-5 max-w-[35rem] text-[1.0625rem] leading-[1.65] text-pretty text-fg-muted md:mt-6 md:text-[clamp(1.0625rem,1.08vw,1.1875rem)]"
+            style={delay(760)}
           >
-            {HERO.copy}
+            {HERO_COPY}
           </p>
-          <div className="enter mt-9 flex flex-wrap items-center gap-4" style={delay(360)}>
-            <ButtonLink href={`#${SECTION_IDS.packages}`} variant="paper">
-              {HERO.cta}
+
+          <div
+            className="enter mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:justify-center sm:gap-6"
+            style={delay(880)}
+          >
+            <ButtonLink href={PRIMARY_CTA.href} arrow="up-right">
+              {PRIMARY_CTA.label}
+            </ButtonLink>
+            <ButtonLink href={`#${SECTION_IDS.work}`} variant="ghost" arrow="right">
+              Explore Our Work
             </ButtonLink>
           </div>
+
+          <div className="enter mt-9 w-full max-w-[31.25rem]" style={delay(980)}>
+            <div aria-hidden="true" className="relative h-px bg-line">
+              <span className="absolute inset-y-0 left-1/2 w-8 -translate-x-1/2 bg-accent" />
+            </div>
+            <p className="mx-auto mt-6 max-w-[27rem] font-mono text-xs leading-[1.9] tracking-[0.07em] text-fg-subtle uppercase">
+              For indie developers, ambitious studios, and the next generation of games.
+            </p>
+          </div>
         </div>
+      </Container>
+
+      {/* Scroll cue — the one floating element, pointing at what's next. */}
+      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 md:block">
+        <a
+          href="#about"
+          className="enter flex flex-col items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-fg-subtle uppercase transition-colors hover:text-fg"
+          style={delay(1200)}
+        >
+          Scroll
+          <span className="bob flex h-9 w-5 justify-center rounded-full border border-fg/30 pt-1.5">
+            <span className="h-2 w-px bg-accent" />
+          </span>
+        </a>
+      </div>
+
+      {/* Bottom hairline with travelling light — hands the eye to the next section. */}
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px overflow-hidden bg-line">
+        {[0, 1, 2, 3].map((n) => (
+          <span
+            key={n}
+            className="glint absolute inset-y-0 w-1/5 bg-[linear-gradient(90deg,transparent,var(--color-accent),transparent)]"
+            style={{ left: `${n * 25}%`, "--glint-delay": `${n * 800}ms` } as CSSProperties}
+          />
+        ))}
       </div>
     </section>
   );

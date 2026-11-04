@@ -93,6 +93,10 @@ v3 শেষ — Shahriar-এর review-এর অপেক্ষা। Art এ�
 | A24 | Light-only, toggle নেই | Shahriar-এর উত্তর; main site-এ dark mode নেই |
 | A25 | Button-এর নীল main site-এর চেয়ে সামান্য গাঢ় (`accent-strong`) | সাদা লেখায় AA (5.2:1); main site-এর রঙে 3.4:1 |
 | A26 | Newsletter form বানানো হয়নি; main site-এ subscribe-এর link | Backend নেই, ভুয়া form নয় |
+| A27 | Landing = ad page, homepage clone নয় | Shahriar: "pura orginal website copy marso … ad run er jonno" |
+| A28 | Navbar-এ শুধু logo + CTA | Shahriar-এর উত্তর; ad conversion |
+| A29 | Submit button disabled নয়, aria-disabled + guard | `15` §7, §9 |
+| A30 | "Main site-এর মতো" = রঙ, font, pattern — layout/navbar/ছবি/copy নয় | Shahriar 2026-11-03: v8 পুরো copy হওয়ায় আপত্তি |
 | A14 | Pubzi-র code/asset copy নয়, শুধু pattern | Paid Envato template — license ছাড়া copy করা যায় না |
 | A15 | Testimonial, client logo, counter, দাম নেই | যাচাইকৃত data নেই (`00 §93–94`); Shahriar: দাম ছাড়া engagement |
 | A16 | Inquiry → `INQUIRY_TO_EMAIL=shahriarfardows@gmail.com` | Shahriar-এর উত্তর (2026-10-22) |
@@ -130,6 +134,8 @@ v3 শেষ — Shahriar-এর review-এর অপেক্ষা। Art এ�
 | 2026-10-22 | v6: hero art-এর বাঁ দিক lift; light/dark theme; What we build-এ তিনটা আলাদা visual |
 | 2026-10-29 | v7: আসল logo, font, রঙ; লাইভ site + services.txt থেকে সব content; services tabs; packages; form stage field |
 | 2026-11-03 | v8: main site-এর design system হুবহু — light-only, pill navbar, main-site hero ও ছবি, সব section তার ক্রমে; পুরনো art/WebGL/marquee/toggle বাদ |
+| 2026-11-03 | v9: ad landing page — free audit offer, form above the fold, audit-report section, fit/FAQ; v8-এর token রাখা, layout/copy নতুন |
+| 2026-11-03 | v10: v8/v9 বাতিল; e402120 (v7) ফেরত + main site-এর রঙ ও pattern; navbar/hero art/toggle/inquiry form নিজেদের |
 
 ## Notes for future sessions
 

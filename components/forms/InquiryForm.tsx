@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from "react";
 import { submitInquiry, type InquiryField, type InquiryState } from "@/app/actions/inquiry";
-import { ArrowRight } from "@/components/ui/Icons";
+import ArrowIcon from "@/components/ui/ArrowIcon";
 import { INQUIRY_BUDGETS, INQUIRY_SERVICES, INQUIRY_STAGES } from "@/data/content";
 
 const initialState: InquiryState = { status: "idle" };
@@ -116,14 +116,14 @@ export default function InquiryForm() {
           {INQUIRY_SERVICES.map((service) => (
             <label
               key={service}
-              className="flex cursor-pointer items-center gap-2.5 rounded-md border border-line-strong px-4 py-2.5 text-sm text-fg transition-colors has-[:checked]:border-accent has-[:checked]:bg-accent/10 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent"
+              className="flex cursor-pointer items-center gap-2.5 rounded-sm border border-line-strong px-4 py-2.5 text-sm text-fg transition-colors has-[:checked]:border-accent has-[:checked]:bg-accent/10 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent"
             >
               <input
                 type="checkbox"
                 name="services"
                 value={service}
                 defaultChecked={values.services?.split("|").includes(service)}
-                className="size-4 accent-[oklch(62%_0.16_235)]"
+                className="size-4 accent-[#0092d7]"
               />
               {service}
             </label>
@@ -173,11 +173,11 @@ export default function InquiryForm() {
           type="submit"
           disabled={pending}
           aria-busy={pending}
-          className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-paper px-6 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-[oklch(94%_0.01_240)] disabled:cursor-progress disabled:opacity-70"
+          className="group inline-flex h-[3.375rem] items-center justify-center gap-3 rounded-sm bg-accent px-[1.625rem] text-[0.9375rem] font-semibold text-on-accent transition-colors duration-200 hover:bg-fg disabled:cursor-progress disabled:opacity-70"
         >
           {pending ? "Sending…" : "Send inquiry"}
           {!pending && (
-            <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            <ArrowIcon className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           )}
         </button>
         <p className="text-sm text-fg-subtle">We use your details only to reply to this inquiry.</p>

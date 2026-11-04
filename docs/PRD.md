@@ -151,3 +151,7 @@ Packages: Launch Readiness (4–8 সপ্তাহ) · Wishlist Growth (12–2
 ## v8 (2026-11-03)
 
 Landing page = main site (retro-vision-games.lovable.app)-এর home-এর মতো, সাথে দুইটা বাড়তি জিনিস: পূর্ণ ১৬-service scope (tabs) আর CTA card-এর ভেতরে কাজ করা inquiry form। Hero copy main site-এর: "Your game also deserves the spotlight."। Editorial/FAQ/Privacy link main site-এ যায় (`MAIN_SITE`)।
+
+## v9 (2026-11-03) — Ad landing page
+
+Page-এর একটাই কাজ: ad থেকে আসা pre-launch indie dev-কে **free marketing audit request** পাঠাতে রাজি করানো। Form: name, email, game link (required), title, launch window, worry (optional) + UTM। Delivery: Resend (`RESEND_API_KEY`, `INQUIRY_TO_EMAIL`); না থাকলে সৎ error। Studio-কে রাখতে হবে এমন প্রতিশ্রুতি `data/content.ts` → `PROMISES` ও FAQ-তে: ৪৮ ঘণ্টায় মানুষের reply, free/no obligation, মানুষের লেখা audit, unannounced game-এর গোপনীয়তা, ইচ্ছে হলে call।

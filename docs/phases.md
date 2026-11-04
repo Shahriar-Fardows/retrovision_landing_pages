@@ -113,3 +113,18 @@ updated: 2026-10-22
 - [x] পুরনো art, WebGL motion, marquee, cursor, unused section মুছে ফেলা
 - [x] AA contrast মাপা, 360–1920px overflow ০
 - [ ] Main site-এর domain স্থায়ী হলে `MAIN_SITE` বদলানো
+
+## 2026-11-03 — v9: Ad landing page
+
+- [x] Offer/audience/nav ঠিক (audit · pre-launch indie · logo+CTA)
+- [x] Hero + request slip, Pains, Audit report, Steps, Fit, FAQ, Final CTA, compact footer
+- [x] `requestAudit` action + UTM capture; পুরনো inquiry/sections/ছবি মুছে ফেলা
+- [x] QA: 1440 + 375, overflow ০, form validation/“not connected”, build
+- [ ] Studio PROMISES নিশ্চিত করা (৪৮h, call, গোপনীয়তা)
+- [ ] Resend env + ad pixel/conversion event (Meta/Google) — account লাগবে
+
+## 2026-11-03 — v10: v7 ফেরত + main-site style
+
+- [x] e402120-এর code ফেরত (docs বাদে)
+- [x] Main-site palette দুই theme-এ, eyebrow/highlight/anaglyph/rail pattern
+- [x] QA: 1440 dark+light, 375, overflow ০, form, AA, build

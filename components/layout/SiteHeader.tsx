@@ -2,14 +2,22 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import ButtonLink from "@/components/ui/ButtonLink";
-import { Close, Menu } from "@/components/ui/Icons";
 import Logo from "@/components/ui/Logo";
+import ThemeToggle from "@/components/ui/ThemeToggle";
+import Container from "@/components/ui/Container";
 import { NAV_LINKS, PRIMARY_CTA } from "@/data/site";
 
-// The main site's floating pill navbar: logo, underscore-suffixed links, blue pill CTA.
-// On phones the links fold into a panel that drops below the pill.
+function Wordmark() {
+  return (
+    <a href="#top" className="flex h-11 items-center" aria-label="Retro_Vision — back to top">
+      <Logo priority className="w-[168px] sm:w-[200px]" />
+    </a>
+  );
+}
+
 export default function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -18,99 +26,153 @@ export default function SiteHeader() {
     if (restoreFocus) toggleRef.current?.focus();
   }, []);
 
+  // Transparent over the hero art; a tinted bar once the page scrolls.
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   useEffect(() => {
     if (!isOpen) return;
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeMenu(true);
     };
     const desktop = window.matchMedia("(min-width: 1024px)");
     const onBreakpoint = () => desktop.matches && closeMenu();
+
+    document.body.style.overflow = "hidden";
     document.addEventListener("keydown", onKeyDown);
     desktop.addEventListener("change", onBreakpoint);
-    menuRef.current?.querySelector("a")?.focus();
+    // Focus the panel itself: the next Tab reaches the first link, and touch
+    // users don't get a focus ring on a link they didn't choose.
+    menuRef.current?.focus();
+
     return () => {
+      document.body.style.overflow = "";
       document.removeEventListener("keydown", onKeyDown);
       desktop.removeEventListener("change", onBreakpoint);
     };
   }, [isOpen, closeMenu]);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-2 z-50 flex flex-col items-center px-3 sm:top-4 sm:px-4">
-      <header className="pointer-events-auto w-full max-w-6xl rounded-full border border-line/70 bg-bg/90 shadow-[var(--shadow-card-hover)] backdrop-blur-md">
-        <div className="flex h-12 items-center justify-between gap-2 px-2.5 sm:h-14 sm:px-5">
-          <a href="#top" className="flex items-center rounded-md pl-1.5 sm:pl-2" aria-label="Retro_Vision — back to top">
-            <Logo priority className="w-[132px] sm:w-[150px]" />
-          </a>
+    // backdrop-filter would become the containing block for the fixed menu panel,
+    // so the open state uses a solid surface instead of blur.
+    // Over the hero (top of page, menu closed) the bar sits on dark art, so it
+    // pins the dark theme; once tinted it follows the visitor's theme.
+    <header
+      data-theme={!isOpen && !isScrolled ? "dark" : undefined}
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-300 ${
+        isOpen
+          ? "border-line bg-surface"
+          : isScrolled
+            ? "border-line bg-bg/80 backdrop-blur-md"
+            : "border-transparent"
+      }`}
+    >
+      <Container className="relative flex h-[var(--header-h)] items-center justify-between gap-6">
+        <Wordmark />
 
-          <nav aria-label="Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-1">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
+        <nav
+          aria-label="Primary"
+          className="absolute left-1/2 hidden -translate-x-1/2 lg:block"
+        >
+          <ul className="flex items-center gap-4 xl:gap-6">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="group relative inline-flex h-11 items-center px-2.5 text-[0.9375rem] font-medium text-fg/85 transition-colors duration-200 hover:text-fg"
+                >
+                  {link.label}
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-2.5 bottom-2 h-px origin-left scale-x-0 bg-accent transition-transform duration-300 ease-[var(--ease-out)] group-hover:scale-x-100"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggle />
+          <ButtonLink
+            href={PRIMARY_CTA.href}
+            variant="outline"
+            arrow="up-right"
+          >
+            {PRIMARY_CTA.label}
+          </ButtonLink>
+        </div>
+
+        <div className="-mr-2 flex items-center lg:hidden">
+          <ThemeToggle />
+          <button
+            ref={toggleRef}
+            type="button"
+            className="inline-flex size-11 items-center justify-center text-fg"
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            onClick={() => setIsOpen((open) => !open)}
+          >
+            <span aria-hidden="true" className="relative block h-3 w-6">
+              <span
+                className={`absolute left-0 h-[1.5px] w-full bg-current transition-transform duration-300 ease-[var(--ease-out)] ${
+                  isOpen ? "top-[5px] rotate-45" : "top-0"
+                }`}
+              />
+              <span
+                className={`absolute left-0 h-[1.5px] bg-current transition-[transform,width] duration-300 ease-[var(--ease-out)] ${
+                  isOpen ? "top-[5px] w-full -rotate-45" : "top-[10px] w-4"
+                }`}
+              />
+            </span>
+          </button>
+        </div>
+      </Container>
+
+      <div
+        ref={menuRef}
+        id="mobile-menu"
+        hidden={!isOpen}
+        tabIndex={-1}
+        className="fixed inset-x-0 top-[var(--header-h)] bottom-0 overflow-y-auto border-t border-line bg-surface outline-none lg:hidden"
+      >
+        <Container className="flex min-h-full flex-col justify-between gap-12 pt-6 pb-10">
+          <nav aria-label="Mobile">
+            <ul>
+              {NAV_LINKS.map((link, index) => (
+                <li key={link.href} className="border-b border-line">
                   <a
                     href={link.href}
-                    className="group inline-flex items-center rounded-lg py-2 pr-5 pl-3 text-sm font-medium text-fg/70 transition-colors hover:text-fg"
+                    onClick={() => closeMenu()}
+                    className="flex items-baseline justify-between py-5 text-fg"
                   >
-                    {link.label}
-                    <span aria-hidden="true" className="text-fg/30 transition-colors group-hover:text-accent-red">
-                      _
+                    <span className="text-[2rem] leading-none font-bold tracking-[-0.03em]">
+                      {link.label}
+                    </span>
+                    <span className="font-mono text-xs text-fg-subtle">
+                      0{index + 1}
                     </span>
                   </a>
                 </li>
               ))}
             </ul>
           </nav>
-
-          <div className="flex items-center gap-1">
-            <span className="hidden sm:block">
-              <ButtonLink href={PRIMARY_CTA.href} variant="pill">
-                {PRIMARY_CTA.label}
-              </ButtonLink>
-            </span>
-            <button
-              ref={toggleRef}
-              type="button"
-              className="inline-flex size-10 items-center justify-center rounded-full text-fg transition-colors hover:bg-surface-2 lg:hidden"
-              aria-expanded={isOpen}
-              aria-controls="mobile-menu"
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-              onClick={() => setIsOpen((open) => !open)}
-            >
-              {isOpen ? <Close className="size-5" /> : <Menu className="size-5" />}
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <div
-        ref={menuRef}
-        id="mobile-menu"
-        hidden={!isOpen}
-        className="pointer-events-auto mt-2 w-full max-w-6xl rounded-2xl border border-line/70 bg-bg/95 p-3 shadow-[var(--shadow-card-hover)] backdrop-blur-md lg:hidden"
-      >
-        <nav aria-label="Mobile">
-          <ul className="grid">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => closeMenu()}
-                  className="flex items-center justify-between rounded-lg px-3 py-3 font-display text-lg font-bold text-fg hover:bg-surface-2"
-                >
-                  <span>
-                    {link.label}
-                    <span aria-hidden="true" className="text-accent-red">
-                      _
-                    </span>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <ButtonLink href={PRIMARY_CTA.href} onClick={() => closeMenu()} className="mt-2 w-full">
-          {PRIMARY_CTA.label}
-        </ButtonLink>
+          <ButtonLink
+            href={PRIMARY_CTA.href}
+            arrow="up-right"
+            className="w-full"
+            onClick={() => closeMenu()}
+          >
+            {PRIMARY_CTA.label}
+          </ButtonLink>
+        </Container>
       </div>
-    </div>
+    </header>
   );
 }
