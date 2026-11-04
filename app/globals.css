@@ -228,6 +228,26 @@ body {
   animation: bob 2.8s ease-in-out infinite;
 }
 
+/* Checkpoint number in "What we do": outlined until the rocket reaches it, then
+   filled with the anaglyph. */
+.checkpoint-num {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-line-strong);
+  background-image: var(--gradient-anaglyph);
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-size: 100% 0%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  transition:
+    background-size 0.6s var(--ease-out),
+    -webkit-text-stroke-color 0.6s;
+}
+[data-lit] .checkpoint-num {
+  background-size: 100% 100%;
+  -webkit-text-stroke-color: transparent;
+}
+
 /* Rocket flame in "What we do": a quick flicker from the nozzle. */
 @keyframes flame {
   0%,

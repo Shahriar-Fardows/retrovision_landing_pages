@@ -327,3 +327,18 @@ desktop (lg+)                      mobile
 | Cards | প্রতি সারির দুটো card একসাথে — বাঁয়েরটা x −160 / rotate −4°, ডানেরটা +160 / +4° থেকে; mobile-এ সব ডান থেকে (x 80) |
 | Overflow | Section `overflow-x-clip` |
 | Reduced motion | `gsap.matchMedia` — কোনো animation নয়, সব দৃশ্যমান; flame থেমে থাকে |
+
+## v10.3 (2026-11-04) — What we do: mission checkpoints
+
+Rocket + rail system অপরিবর্তিত; card layout নতুন (Shahriar বেছেছেন "Mission checkpoints")।
+
+```
+[01 Storefront ]──●        প্রতি সারিতে একটা card, zigzag (বাঁ/ডান), আগেরটার সাথে overlap
+          │                connector + node rail-এ; rocket-এর নাক node ছুঁলে data-lit:
+          🚀                 node ভরে (blue/red) + glow, card border নীল,
+          ●──[02 Positioning]  বড় outlined নম্বর নিচ থেকে anaglyph-এ ভরে ওঠে
+```
+
+- Card: "Checkpoint 0N" mono label, title, tagline, ৪টা service 2×2 (◆ marker + focus)
+- Lit logic: timeline `onUpdate`-এ rocket nose vs node center মেপে `data-lit` toggle — scroll উল্টালে নিভে যায়
+- Mobile: rail বাঁয়ে, card ডানে, node rail-এ; reduced motion: সব checkpoint lit, কোনো movement নেই

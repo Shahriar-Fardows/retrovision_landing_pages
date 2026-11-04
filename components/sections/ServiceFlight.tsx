@@ -4,16 +4,29 @@ import { useRef } from "react";
 import type { ServiceCategory } from "@/data/content";
 import { gsap, useGSAP } from "@/lib/gsap";
 
-// "What we do" as a flight path: a rocket travels down the centre rail with the
-// scroll while each row's two disciplines slide in from opposite sides. Everything
-// is scrubbed, so scrolling back reverses it. Phones: rail on the left, cards from
-// the right. Reduced motion: no movement, everything visible.
+const ROCKET_H = 56;
+
+// "What we do" as a mission: a rocket travels down the centre rail with the scroll,
+// and each discipline is a checkpoint — a card on alternating sides, joined to the
+// rail by a node. The card slides in from its own side; when the rocket reaches
+// the node, the checkpoint lights up. Everything is scrubbed, so scrolling back
+// reverses it. Phones: rail on the left, cards on the right. Reduced motion: no
+// movement, every checkpoint shown lit.
 export default function ServiceFlight({ categories }: { categories: readonly ServiceCategory[] }) {
   const root = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
+      const board = root.current!;
+      const rail = board.querySelector<HTMLElement>("[data-rail]")!;
+      const rocket = board.querySelector<HTMLElement>("[data-rocket]")!;
+      const checkpoints = [...board.querySelectorAll<HTMLElement>("[data-checkpoint]")];
       const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        checkpoints.forEach((cp) => cp.setAttribute("data-lit", ""));
+      });
+
       mm.add(
         {
           desktop: "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
@@ -21,31 +34,47 @@ export default function ServiceFlight({ categories }: { categories: readonly Ser
         },
         (context) => {
           const { desktop } = context.conditions as { desktop: boolean };
-          const board = root.current!;
-          const rail = board.querySelector<HTMLElement>("[data-rail]")!;
+
+          // Light every checkpoint whose node the rocket's nose has reached.
+          const lightUp = () => {
+            const nose = rail.getBoundingClientRect().top + Number(gsap.getProperty(rocket, "y")) + ROCKET_H;
+            checkpoints.forEach((cp) => {
+              const node = cp.querySelector<HTMLElement>("[data-node]")!.getBoundingClientRect();
+              cp.toggleAttribute("data-lit", nose >= node.top + node.height / 2);
+            });
+          };
 
           gsap
             .timeline({
               defaults: { ease: "none" },
-              scrollTrigger: { trigger: board, start: "top 70%", end: "bottom 65%", scrub: 0.6, invalidateOnRefresh: true },
+              scrollTrigger: {
+                trigger: board,
+                start: "top 70%",
+                end: "bottom 65%",
+                scrub: 0.6,
+                invalidateOnRefresh: true,
+              },
+              onUpdate: lightUp,
             })
             .fromTo("[data-rail-fill]", { scaleY: 0 }, { scaleY: 1 }, 0)
-            .fromTo("[data-rocket]", { y: 0 }, { y: () => rail.offsetHeight - 56 }, 0);
+            .fromTo(rocket, { y: 0 }, { y: () => rail.offsetHeight - ROCKET_H }, 0);
 
-          board.querySelectorAll<HTMLElement>("[data-card]").forEach((card, i) => {
+          checkpoints.forEach((cp, i) => {
             const fromLeft = desktop && i % 2 === 0;
             gsap.fromTo(
-              card,
-              { x: desktop ? (fromLeft ? -160 : 160) : 80, rotate: desktop ? (fromLeft ? -4 : 4) : 2, opacity: 0 },
+              cp.querySelector("[data-card]"),
+              { x: desktop ? (fromLeft ? -140 : 140) : 70, rotate: desktop ? (fromLeft ? -3 : 3) : 2, opacity: 0 },
               {
                 x: 0,
                 rotate: 0,
                 opacity: 1,
                 ease: "power2.out",
-                scrollTrigger: { trigger: card, start: "top 92%", end: "top 55%", scrub: 0.6 },
+                scrollTrigger: { trigger: cp, start: "top 90%", end: "top 55%", scrub: 0.6 },
               },
             );
           });
+
+          return () => checkpoints.forEach((cp) => cp.removeAttribute("data-lit"));
         },
       );
     },
@@ -64,43 +93,72 @@ export default function ServiceFlight({ categories }: { categories: readonly Ser
           data-rail-fill
           className="absolute inset-0 origin-top bg-[linear-gradient(180deg,var(--color-accent),var(--color-accent-violet),var(--color-accent-red))]"
         />
-        <div data-rocket className="absolute top-0 left-1/2 w-10 -translate-x-1/2">
+        <div data-rocket className="absolute top-0 left-1/2 z-10 w-10 -translate-x-1/2">
           <Rocket />
         </div>
       </div>
 
-      <ol className="grid gap-6 pl-12 lg:grid-cols-2 lg:gap-x-32 lg:gap-y-16 lg:pl-0">
-        {categories.map((category, i) => (
-          <li
-            key={category.id}
-            data-card
-            className="flex flex-col rounded-xl border border-line-strong bg-surface p-6 shadow-[0_24px_48px_-28px_rgb(0_0_0/0.45)] sm:p-8 xl:p-10"
-          >
-            <div className="flex items-center justify-between gap-4 font-mono text-xs">
-              <span className="flex items-center gap-3 text-fg-subtle">
-                <span aria-hidden="true" className={`size-2.5 ${i % 2 ? "bg-accent-red" : "bg-accent"}`} />
-                {category.index}
+      <ol className="flex flex-col gap-10 pl-14 lg:gap-0 lg:pl-0">
+        {categories.map((category, i) => {
+          const left = i % 2 === 0;
+          return (
+            <li
+              key={category.id}
+              data-checkpoint
+              // Desktop zigzag: each card takes one half and overlaps the one before it.
+              className={`group/cp relative lg:w-[calc(50%-4.5rem)] ${left ? "lg:self-start" : "lg:self-end"} ${i > 0 ? "lg:-mt-24" : ""}`}
+            >
+              {/* Connector and node on the rail. */}
+              <span
+                aria-hidden="true"
+                className={`absolute top-12 right-full h-px w-9 bg-line-strong transition-colors duration-500 group-data-[lit]/cp:bg-accent ${
+                  left ? "lg:right-auto lg:left-full lg:w-[4.5rem]" : "lg:w-[4.5rem]"
+                }`}
+              >
+                <span
+                  data-node
+                  className={`absolute top-1/2 left-0 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-line-strong bg-bg transition-[background-color,border-color,box-shadow] duration-500 ${
+                    left ? "lg:right-0 lg:left-auto lg:translate-x-1/2" : ""
+                  } ${
+                    i % 2
+                      ? "group-data-[lit]/cp:border-accent-red group-data-[lit]/cp:bg-accent-red group-data-[lit]/cp:shadow-[0_0_0_6px_oklch(62%_0.22_25/0.18)]"
+                      : "group-data-[lit]/cp:border-accent group-data-[lit]/cp:bg-accent group-data-[lit]/cp:shadow-[0_0_0_6px_oklch(62%_0.16_235/0.2)]"
+                  }`}
+                />
               </span>
-              <span className="text-fg-subtle">{category.services.length} services</span>
-            </div>
-            <h3 className="mt-6 text-[clamp(1.5rem,2.4vw,2rem)] leading-tight font-bold tracking-[-0.02em] text-fg">
-              {category.title}
-            </h3>
-            <p className="mt-2 max-w-md text-fg-muted">{category.tagline}</p>
 
-            <ul className="mt-8 border-t border-line">
-              {category.services.map((service) => (
-                <li
-                  key={service.name}
-                  className="grid gap-1 border-b border-line py-4 last:border-b-0 sm:grid-cols-[9.5rem_1fr] sm:gap-6"
-                >
-                  <span className="font-semibold text-fg">{service.name}</span>
-                  <span className="text-[0.9375rem] leading-relaxed text-fg-muted">{service.focus}</span>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
+              <article
+                data-card
+                className="rounded-xl border border-line-strong bg-surface p-6 shadow-[0_24px_48px_-28px_rgb(0_0_0/0.45)] transition-[border-color] duration-500 group-data-[lit]/cp:border-accent/60 sm:p-8"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="font-mono text-xs tracking-[0.12em] text-fg-subtle uppercase">Checkpoint {category.index}</p>
+                    <h3 className="mt-3 text-[clamp(1.5rem,2.3vw,1.875rem)] leading-tight font-bold tracking-[-0.02em] text-fg">
+                      {category.title}
+                    </h3>
+                  </div>
+                  <span aria-hidden="true" className="checkpoint-num font-display text-6xl leading-none font-bold">
+                    {category.index}
+                  </span>
+                </div>
+                <p className="mt-3 text-fg-muted">{category.tagline}</p>
+
+                <ul className="mt-6 grid gap-x-6 gap-y-5 border-t border-line pt-6 sm:grid-cols-2">
+                  {category.services.map((service) => (
+                    <li key={service.name}>
+                      <p className="flex items-center gap-2 font-semibold text-fg">
+                        <span aria-hidden="true" className={`size-1.5 rotate-45 ${i % 2 ? "bg-accent-red" : "bg-accent"}`} />
+                        {service.name}
+                      </p>
+                      <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{service.focus}</p>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </li>
+          );
+        })}
       </ol>
     </div>
   );
