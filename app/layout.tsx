@@ -1,8 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
-import SiteFooter from "@/components/layout/SiteFooter";
-import SiteHeader from "@/components/layout/SiteHeader";
-import CursorRing from "@/components/motion/CursorRing";
 import "./globals.css";
 
 // Brand type: Space Grotesk (display), Inter (body), JetBrains Mono (labels).
@@ -33,7 +30,7 @@ export const viewport: Viewport = {
 // with components/ui/ThemeToggle.tsx (same storage key).
 const themeScript = `(function(){try{var t=localStorage.getItem("rv-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
@@ -52,10 +49,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <SiteFooter />
-        <CursorRing />
+        {/* Each version (app/(v1), app/v2) brings its own header, main and footer. */}
+        {children}
       </body>
     </html>
   );

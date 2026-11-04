@@ -342,3 +342,28 @@ Rocket + rail system অপরিবর্তিত; card layout নতুন (S
 - Card: "Checkpoint 0N" mono label, title, tagline, ৪টা service 2×2 (◆ marker + focus)
 - Lit logic: timeline `onUpdate`-এ rocket nose vs node center মেপে `data-lit` toggle — scroll উল্টালে নিভে যায়
 - Mobile: rail বাঁয়ে, card ডানে, node rail-এ; reduced motion: সব checkpoint lit, কোনো movement নেই
+
+## v10.4 (2026-11-04) — What happens next: scroll-এ ধাপে ধাপে active
+
+Design অপরিবর্তিত (rule + diamond marker + 4 column)। `components/sections/ProcessTimeline.tsx`:
+
+- Rule-এর ওপর blue→violet→red fill, scroll-এর সাথে বাড়ে (desktop: পাশাপাশি `top 80%→top 30%`; mobile: নিচে `top 75%→bottom 55%`), scrub
+- Fill-এর মাথা কোনো marker পেরোলে সেই step `data-active`: diamond নীল ভরে + glow + একটু বড়, label নীল, title/body উজ্জ্বল, opacity 0.55→1, translateY 8px→0
+- Scroll উল্টালে আবার নিভে যায়; reduced motion: সব step active
+
+## v2 build at `/v2` (2026-11-04) — Heinzsauce-এর নীতিতে সহজ version
+
+> Heinzsauce চান দুটো candidate: তাঁর Lovable build আর আমাদের build, তারপর তুলনা করে v3। তাঁর নীতি: market leader-দের মতো সহজ ও সোজা (IGN), প্রতিটা section মোটামুটি এক viewport-এ, gimmick/জটিল CSS নয়, mobile-responsive, "authenticity over trendiness" — indie dev-রা tech-demo আশা করে না।
+> **v1 (`/`) অপরিবর্তিত** — route group `app/(v1)/` (নিজের header/footer/cursor); `app/v2/` আলাদা layout, `noindex`।
+
+| Section | v2-এ কী |
+|---|---|
+| Header | Sticky সাধারণ bar: logo · Services/Packages/Process/FAQ · theme · CTA pill |
+| Hero | বাঁয়ে headline + copy + ২ CTA + ৩টা সত্য তথ্য; ডানে key art ফ্রেমে (personality) — full-bleed নয় |
+| Problems | ৩ কলাম: problem → "Our fix" |
+| Services | ৪ কলাম; প্রতিটা service একটা toggle — What we do + picker এক জায়গায় |
+| Packages | ৩টা card + select, summary bar |
+| Process | ৪টা ছোট card, static |
+| FAQ / Inquiry | Accordion; form ডানে |
+
+Motion (সাধারণ, gimmick নয়): hero-র লেখা load-এ এক এক করে উঠে আসে (`.enter`, ৬০–৪৬০ms delay), key art fade/settle; প্রতিটা section-এর card scroll-এ একবার fade-up, stagger (`Reveal`); card-এ hover-এ ৪px lift + ছায়া। Reduced motion-এ সব বন্ধ। Desktop-এ section উচ্চতা ৪৪৬–৯০৬px।
