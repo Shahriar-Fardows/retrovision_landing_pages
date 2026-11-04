@@ -298,3 +298,13 @@ Footer (ink, compact)       email · main site · privacy
 
 **নেওয়া হয়নি:** main site-এর navbar, hero image, section ক্রম, copy।
 **Contrast (মাপা):** button 5.6:1 · muted 10.2 (dark) / 6.8 (light) · subtle 6.9 / 5.7।
+
+## v10.1 (2026-11-04) — What we do board, service picker, main-site buttons
+
+| বদল | বিস্তারিত |
+|---|---|
+| **What we do** | Tabs বাদ (১২টা service লুকানো থাকত)। এখন 2×2 discipline board — প্রতিটায় index, blue/red marker, title, tagline, ৪টা service (নাম + focus)। Variant chip বাদ। |
+| **Where to start** | Package card-এ "Select this package" toggle (`aria-pressed`, card border নীল হয় `:has()` দিয়ে)। নিচে "Or build your own scope" — ১৬টা service toggle chip, discipline অনুযায়ী। Summary bar: কতগুলো বাছা হয়েছে + Clear + "Continue to inquiry"। |
+| **Form** | "What do you need help with?" checkbox বাদ। "Your selection" — বাছাইগুলো removable chip + hidden `services` input; কিছু না বাছলে Where to start-এর link। Action শুধু `PICKABLE` (৩ package + ১৬ service) গ্রহণ করে। |
+| **Selection state** | `lib/selection.ts` — module store + `useSyncExternalStore`; page visit পর্যন্ত থাকে, success হলে clear। |
+| **Buttons** | Main site-এর মতো: 10px radius, `accent-strong` নীল + সাদা লেখা (5.2:1), navbar-এ নীল pill, dark art-এ paper button (19.4:1), সব arrow → ডানে। Submit button `aria-disabled` + guard (disabled নয়)। |

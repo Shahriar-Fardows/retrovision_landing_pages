@@ -38,7 +38,7 @@ export default function FinalCta() {
             Positioning, storefront, trailers and campaigns on one thread — so the moment players arrive, they
             understand, wishlist and buy.
           </p>
-          <ButtonLink href={PRIMARY_CTA.href} arrow="up-right" className="mt-10">
+          <ButtonLink href={PRIMARY_CTA.href} arrow className="mt-10">
             {PRIMARY_CTA.label}
           </ButtonLink>
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-[0.08em] text-fg-muted uppercase">

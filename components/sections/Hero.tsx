@@ -78,10 +78,10 @@ export default function Hero() {
             className="enter mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:justify-center sm:gap-6"
             style={delay(880)}
           >
-            <ButtonLink href={PRIMARY_CTA.href} arrow="up-right">
+            <ButtonLink href={PRIMARY_CTA.href} arrow>
               {PRIMARY_CTA.label}
             </ButtonLink>
-            <ButtonLink href={`#${SECTION_IDS.work}`} variant="ghost" arrow="right">
+            <ButtonLink href={`#${SECTION_IDS.work}`} variant="paper" arrow>
               Explore Our Work
             </ButtonLink>
           </div>

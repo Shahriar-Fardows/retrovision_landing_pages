@@ -1,6 +1,6 @@
 "use server";
 
-import { INQUIRY_BUDGETS, INQUIRY_SERVICES, INQUIRY_STAGES } from "@/data/content";
+import { INQUIRY_BUDGETS, INQUIRY_STAGES, PICKABLE } from "@/data/content";
 
 export type InquiryField = "name" | "email" | "studio" | "message";
 
@@ -32,7 +32,7 @@ export async function submitInquiry(_prev: InquiryState, formData: FormData): Pr
   const services = formData
     .getAll("services")
     .map(String)
-    .filter((s) => (INQUIRY_SERVICES as readonly string[]).includes(s));
+    .filter((s, i, all) => PICKABLE.includes(s) && all.indexOf(s) === i);
 
   const echo = { ...values, services: services.join("|") };
 

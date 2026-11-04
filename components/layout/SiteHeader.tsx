@@ -102,7 +102,7 @@ export default function SiteHeader() {
           <ButtonLink
             href={PRIMARY_CTA.href}
             variant="outline"
-            arrow="up-right"
+            arrow
           >
             {PRIMARY_CTA.label}
           </ButtonLink>
@@ -165,7 +165,7 @@ export default function SiteHeader() {
           </nav>
           <ButtonLink
             href={PRIMARY_CTA.href}
-            arrow="up-right"
+            arrow
             className="w-full"
             onClick={() => closeMenu()}
           >

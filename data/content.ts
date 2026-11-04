@@ -297,13 +297,12 @@ export const FAQS = [
   },
 ] as const;
 
-export const INQUIRY_SERVICES = [
-  "Storefront & conversion",
-  "Positioning & strategy",
-  "Trailers & motion",
-  "Campaigns & creators",
-  "Not sure yet",
-] as const;
+// Everything a visitor can pick in "Where to start": the three packages and the
+// sixteen single services. The inquiry action accepts only these values.
+export const PICKABLE = [
+  ...PACKAGES.map((item) => item.name),
+  ...SERVICE_CATEGORIES.flatMap((category) => category.services.map((service) => service.name)),
+] as readonly string[];
 
 export const INQUIRY_STAGES = [
   "Pre-announce",

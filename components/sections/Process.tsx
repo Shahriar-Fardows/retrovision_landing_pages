@@ -16,7 +16,7 @@ export default function Process() {
             title={<>A short path from question to <span className="highlight-blue">a clear decision.</span></>}
             intro="No obligation until you accept the scope."
           />
-          <ButtonLink href={PRIMARY_CTA.href} variant="ghost" arrow="up-right" className="self-start md:self-auto">
+          <ButtonLink href={PRIMARY_CTA.href} variant="ghost" arrow className="self-start md:self-auto">
             {PRIMARY_CTA.label}
           </ButtonLink>
         </div>

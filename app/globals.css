@@ -16,6 +16,11 @@
   --color-accent-red: oklch(62% 0.22 25); /* brand red — markers and the anaglyph */
   --color-accent-violet: oklch(55% 0.2 280); /* anaglyph midpoint */
   --color-on-accent: oklch(16% 0.02 245); /* ink on brand blue — 6:1 */
+  --color-accent-strong: oklch(52% 0.15 238); /* button blue behind white text — 5.2:1 */
+  --color-accent-strong-hover: oklch(46% 0.14 238);
+  --color-on-accent-strong: oklch(100% 0 0);
+  --color-paper: oklch(100% 0 0);
+  --color-ink: oklch(16% 0.02 245);
   --color-danger: oklch(72% 0.16 25); /* form errors on dark */
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
