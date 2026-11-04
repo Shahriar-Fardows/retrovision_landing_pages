@@ -228,6 +228,23 @@ body {
   animation: bob 2.8s ease-in-out infinite;
 }
 
+/* Rocket flame in "What we do": a quick flicker from the nozzle. */
+@keyframes flame {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.72);
+  }
+}
+
+.rocket-flame {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: flame 0.18s ease-in-out infinite;
+}
+
 /* Infinite marquee: the track holds two copies and slides by one copy. */
 @keyframes marquee {
   to {
@@ -252,6 +269,7 @@ body {
   .split-char,
   .glint,
   .bob,
+  .rocket-flame,
   .marquee-track {
     animation: none;
   }

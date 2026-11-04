@@ -308,3 +308,22 @@ Footer (ink, compact)       email · main site · privacy
 | **Form** | "What do you need help with?" checkbox বাদ। "Your selection" — বাছাইগুলো removable chip + hidden `services` input; কিছু না বাছলে Where to start-এর link। Action শুধু `PICKABLE` (৩ package + ১৬ service) গ্রহণ করে। |
 | **Selection state** | `lib/selection.ts` — module store + `useSyncExternalStore`; page visit পর্যন্ত থাকে, success হলে clear। |
 | **Buttons** | Main site-এর মতো: 10px radius, `accent-strong` নীল + সাদা লেখা (5.2:1), navbar-এ নীল pill, dark art-এ paper button (19.4:1), সব arrow → ডানে। Submit button `aria-disabled` + guard (disabled নয়)। |
+
+## v10.2 (2026-11-04) — What we do: scroll flight (rocket)
+
+`components/sections/ServiceFlight.tsx` — GSAP ScrollTrigger, সব scrub (scroll উল্টালে উল্টো চলে)।
+
+```
+desktop (lg+)                      mobile
+  [card 01] ←──  │  ──→ [card 02]     │ ←── [card 01]
+                 🚀 (nose down)       🚀
+  [card 03] ←──  │  ──→ [card 04]     │ ←── [card 02] …
+```
+
+| অংশ | আচরণ |
+|---|---|
+| Rail | মাঝখানে 2px track; blue→violet→red fill `scaleY 0→1` (board top 70% → bottom 65%) |
+| Rocket | Custom SVG (body = theme ink, fin/flame = brand red, window = blue), rail বেয়ে নামে; flame CSS flicker 0.18s |
+| Cards | প্রতি সারির দুটো card একসাথে — বাঁয়েরটা x −160 / rotate −4°, ডানেরটা +160 / +4° থেকে; mobile-এ সব ডান থেকে (x 80) |
+| Overflow | Section `overflow-x-clip` |
+| Reduced motion | `gsap.matchMedia` — কোনো animation নয়, সব দৃশ্যমান; flame থেমে থাকে |
